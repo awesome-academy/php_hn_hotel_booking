@@ -17,3 +17,5 @@ yarn-error.log
 /public/images
 /public/uploads
 /.idea
+/public/assets
+
