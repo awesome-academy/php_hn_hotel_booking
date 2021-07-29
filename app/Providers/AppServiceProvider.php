@@ -13,7 +13,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $models = [
+            'User',
+        ];
+        foreach ($models as $model) {
+            $contracts = 'App\Repositories\Contracts\\' . $model . 'RepositoryInterface';
+            $eloquents = 'App\Repositories\Eloquents\\' . $model . 'Repository';
+            $this->app->bind($contracts, $eloquents);
+        }
     }
 
     /**
