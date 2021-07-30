@@ -1,0 +1,7 @@
+{
+    "login_success": "Đăng nhập thành công",
+    "login_failed": "Thông tin bạn nhập không chính xác",
+    "logout_success": "Đăng xuất thành công",
+    "register_success": "Đăng ký thành công",
+    "logout": "Đăng xuất"
+}

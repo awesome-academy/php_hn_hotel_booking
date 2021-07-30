@@ -1,0 +1,7 @@
+{
+    "login_success": "Login successfully",
+    "login_failed": "Email or password not correct",
+    "logout_success": "Logout successfully",
+    "register_success": "Register successfully",
+    "logout": "Logout"
+}
