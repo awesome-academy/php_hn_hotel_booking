@@ -3,5 +3,14 @@
     "login_failed": "Thông tin bạn nhập không chính xác",
     "logout_success": "Đăng xuất thành công",
     "register_success": "Đăng ký thành công",
-    "logout": "Đăng xuất"
+    "logout": "Đăng xuất",
+    "add_success": "Thêm thành công",
+    "partner.pending": "Chờ xử lý",
+    "partner.approved": "Đã duyệt",
+    "booking": "Đặt phòng",
+    "search": "Tìm kiếm",
+    "cms_booking": "Quản lý đặt phòng",
+    "copyright": "Đã đăng ký bản quyền",
+    "version": "Phiên bản",
+    "limit_image": "Không nhập quá số hình ảnh cho phép"
 }
