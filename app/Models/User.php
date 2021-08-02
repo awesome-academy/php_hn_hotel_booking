@@ -41,9 +41,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function roles()
+    public function permissions()
     {
-        return $this->hasMany(Role::class);
+        return $this->belongsToMany(Permission::class, 'user_permission');
     }
 
     public function hotels()
