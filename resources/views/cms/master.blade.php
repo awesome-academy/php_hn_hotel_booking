@@ -24,7 +24,7 @@
     <!-- Navbar -->
     @include('cms.layouts.main-header')
     <!-- Main Sidebar Container -->
-    @include('cms.layouts.sidebar')
+    @yield('sidebar')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
