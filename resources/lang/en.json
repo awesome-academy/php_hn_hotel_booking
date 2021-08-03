@@ -12,5 +12,9 @@
     "cms_booking": "CMS Booking",
     "copyright": "All rights reserved.",
     "version": "Version",
-    "limit_image": "Dont enter more than limit of images"
+    "limit_image": "Dont enter more than limit of images",
+    "approve_success": "Approved successfully",
+    "deny_success": "Denied successfully",
+    "approve_failed": "Approved failed",
+    "deny_failed": "Denied failed"
 }

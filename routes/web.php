@@ -39,3 +39,11 @@ Route::group(['prefix' => 'partners', 'as' => 'partners.', 'middleware' => 'can:
 
     Route::resource('hotels', PartnerController::class)->only('index', 'create', 'store');
 });
+
+Route::group(['prefix' => 'admin', 'middleware' => 'can:login.admin'], function () {
+    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+
+    Route::post('upload', [AdminController::class, 'upload'])->name('admin.hotel.upload');
+
+    Route::post('deny', [AdminController::class, 'deny'])->name('admin.hotel.ban');
+});
