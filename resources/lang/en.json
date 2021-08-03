@@ -3,5 +3,14 @@
     "login_failed": "Email or password not correct",
     "logout_success": "Logout successfully",
     "register_success": "Register successfully",
-    "logout": "Logout"
+    "logout": "Logout",
+    "add_success": "Add successfully",
+    "partner_pending": "Pending",
+    "partner_approved": "Approved",
+    "booking": "Booking",
+    "search": "Search",
+    "cms_booking": "CMS Booking",
+    "copyright": "All rights reserved.",
+    "version": "Version",
+    "limit_image": "Dont enter more than limit of images"
 }
