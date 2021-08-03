@@ -96,7 +96,7 @@
 <!-- AdminLTE App -->
 <script src="{{ asset('bower_components/adminlte3/assets_adminlte3/dist/js/adminlte.js') }}"></script>
 
-<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('assets/js/app.js') }}"></script>
 
 @yield('js')
 </body>
