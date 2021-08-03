@@ -39,21 +39,44 @@
                     <a href="#" class="nav-link active">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>
-                           @lang('partner.hotel')
+                            @lang('partner.hotel')
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('partner.index') }}" class="nav-link active">
+                            <a href="{{ route('partners.hotels.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>@lang('partner.list_hotel')</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('partner.create') }}" class="nav-link">
+                            <a href="{{ route('partners.hotels.create') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>@lang('partner.add_hotel')</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            @lang('partner.room')
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('partners.rooms.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>@lang('partner.list_room')</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('partners.rooms.create') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>@lang('partner.add_room')</p>
                             </a>
                         </li>
                     </ul>

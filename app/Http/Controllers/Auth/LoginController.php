@@ -22,7 +22,7 @@ class LoginController extends Controller
                 return  redirect()->route('admin.index')->with('message', __('login_success'));
             }
 
-            return redirect()->route('partner.index')->with('message', __('login_success'));
+            return redirect()->route('partners.hotels.index')->with('message', __('login_success'));
         }
         $message = [
             'message' => __('login_failed'),

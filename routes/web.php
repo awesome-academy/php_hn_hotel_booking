@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Auth\LoginController;
 use \App\Http\Controllers\Auth\RegisterController;
 use \App\Http\Controllers\PartnerController;
+use \App\Http\Controllers\AdminController;
+use \App\Http\Controllers\Partner\RoomController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,4 +34,8 @@ Route::group(['prefix' => 'cms'], function () {
     Route::post('/register', [RegisterController::class, 'handelRegister'])->name('auth.register');
 });
 
-Route::resource('partners', PartnerController::class);
+Route::group(['prefix' => 'partners', 'as' => 'partners.', 'middleware' => 'can:login.partner'], function () {
+    Route::resource('rooms', RoomController::class)->only('index', 'create', 'store');
+
+    Route::resource('hotels', PartnerController::class)->only('index', 'create', 'store');
+});
