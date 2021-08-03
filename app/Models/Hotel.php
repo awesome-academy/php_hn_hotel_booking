@@ -13,7 +13,7 @@ class Hotel extends Model
         'name',
         'description',
         'province_id',
-        'partner_id',
+        'user_id',
         'rate',
         'status',
     ];

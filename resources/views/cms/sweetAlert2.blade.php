@@ -1,4 +1,4 @@
-<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('assets/js/app.js') }}"></script>
 <script>
     const Toast = Swal.mixin({
         toast: true,

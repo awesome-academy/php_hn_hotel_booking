@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Dashboard</title>
+    <title>Sun* | {{ __('booking') }}</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
@@ -17,6 +17,8 @@
 
     <link rel="stylesheet" href="{{ asset('bower_components/summernote/dist/summernote-bs4.min.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('bower_components/select2/dist/css/select2.min.css') }}">
+
     @yield('css')
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -27,24 +29,6 @@
     @yield('sidebar')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0">Dashboard</h1>
-                    </div><!-- /.col -->
-                    <div class="col-sm-6">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Dashboard v1</li>
-                        </ol>
-                    </div><!-- /.col -->
-                </div><!-- /.row -->
-            </div><!-- /.container-fluid -->
-        </div>
-        <!-- /.content-header -->
-        <!-- Main content -->
         <section class="content">
             @yield('content')
         </section>
@@ -71,7 +55,25 @@
 <script src="{{ asset('bower_components/adminlte3/assets_adminlte3/dist/js/demo.js') }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 
+<script src="{{ asset('bower_components/select2/dist/js/select2.min.js') }}"></script>
+
+<script src="{{ asset('assets/js/js.js')  }}"></script>
+
+<script src=" {{ asset('assets/lfm/lfm.js') }}"></script>
+
 @include('cms.sweetAlert2')
+
+<script>
+    $('.lfm-multi').filemanager('image', {
+        multiple: true,
+        name: 'images',
+        element: '#slider_container',
+        limit: 3,
+        message: '{{ __('limit_image') }}'
+    });
+</script>
+
     @yield('js')
+
 </body>
 </html>
