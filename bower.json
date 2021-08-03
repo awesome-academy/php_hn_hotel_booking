@@ -56,6 +56,7 @@
     "tempusdominus-bootstrap-4": "^5.39.0",
     "font-awesome": "^5.10.0",
     "sweetalert2": "^11.0.20",
-    "adminlte3": "https://github.com/trunghq-2593/assets_adminlte3.git"
+    "adminlte3": "https://github.com/trunghq-2593/assets_adminlte3.git",
+    "assets_travel": "https://github.com/trunghq-2593/assets_travel.git"
   }
 }
