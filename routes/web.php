@@ -6,6 +6,7 @@ use \App\Http\Controllers\Auth\RegisterController;
 use \App\Http\Controllers\PartnerController;
 use \App\Http\Controllers\AdminController;
 use \App\Http\Controllers\Partner\RoomController;
+use \App\Http\Controllers\LanguageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,16 +35,19 @@ Route::group(['prefix' => 'cms'], function () {
     Route::post('/register', [RegisterController::class, 'handelRegister'])->name('auth.register');
 });
 
-Route::group(['prefix' => 'partners', 'as' => 'partners.', 'middleware' => 'can:login.partner'], function () {
-    Route::resource('rooms', RoomController::class)->only('index', 'create', 'store');
+Route::group(['prefix' => 'partners', 'as' => 'partners.',
+        'middleware' => ['can:login.partner']], function () {
+            Route::resource('rooms', RoomController::class)->only('index', 'create', 'store');
 
-    Route::resource('hotels', PartnerController::class)->only('index', 'create', 'store');
-});
+            Route::resource('hotels', PartnerController::class)->only('index', 'create', 'store');
+        });
 
-Route::group(['prefix' => 'admin', 'middleware' => 'can:login.admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['can:login.admin']], function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
 
     Route::post('upload', [AdminController::class, 'upload'])->name('admin.hotel.upload');
 
     Route::post('deny', [AdminController::class, 'deny'])->name('admin.hotel.ban');
 });
+
+Route::get('change-language/{language}', [LanguageController::class, 'changeLanguage'])->name('change-language');
