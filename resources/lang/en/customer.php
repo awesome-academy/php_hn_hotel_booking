@@ -16,4 +16,13 @@ return [
     'filter_by' => 'Filter by',
     'stars' => 'Stars',
     'travel_agency' => 'Travel Agency',
+    'star_rating' => 'Star rating',
+    'name' => 'Name',
+    'price' => 'Price',
+    'ascending' => 'Ascending',
+    'descending' => 'Descending',
+    'sort_by' => 'Sort by',
+    'to' => 'to',
+    'book' => 'Book',
+    'night' => 'night',
 ];

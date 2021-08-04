@@ -16,4 +16,13 @@ return [
     'filter_by' => 'Lọc',
     'stars' => 'sao',
     'travel_agency' => 'Quản lý khách sạn',
+    'star_rating' => 'Đánh giá',
+    'name' => 'Tên',
+    'price' => 'Giá',
+    'ascending' => 'Tăng dần',
+    'descending' => 'Giảm dần',
+    'sort_by' => 'Sắp xếp',
+    'to' => 'Đến',
+    'book' => 'Đặt',
+    'night' => 'đêm',
 ];

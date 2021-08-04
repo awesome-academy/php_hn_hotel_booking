@@ -53,17 +53,18 @@
     @include('customer.layouts.footer')
 <!-- END OF CONTENT -->
 <!-- Javascript -->
-<script src="{{ asset('bower_components/assets_travel/blue/assets/js/initialize-google-map.js') }}"></script>
-
+<!-- Custom Select -->
 <script src="{{ asset('bower_components/assets_travel/blue/assets/js/js-list.js') }}"></script>
+
+<script type='text/javascript' src='{{ asset('bower_components/assets_travel/blue/assets/js/jquery.customSelect.js') }}'></script>
+
+<script src="{{ asset('bower_components/assets_travel/blue/assets/js/initialize-google-map.js') }}"></script>
 
 <script src="{{ asset('bower_components/assets_travel/blue/assets/js/functions.js') }}"></script>
 
 <script src="{{ asset('bower_components/assets_travel/blue/assets/js/jquery.nicescroll.min.js') }}"></script>
 
 <script type="text/javascript" src="{{ asset('bower_components/assets_travel/blue/rs-plugin/js/jquery.themepunch.revolution.min.js') }}"></script>
-<!-- Custom Select -->
-<script type='text/javascript' src='{{ asset('bower_components/assets_travel/blue/assets/js/jquery.customSelect.js') }}'></script>
 
 <script src="{{ asset('bower_components/assets_travel/blue/assets/js/jquery.carouFredSel-6.2.1-packed.js') }}"></script>
 
