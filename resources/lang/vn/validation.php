@@ -23,6 +23,19 @@ return [
         'description' => [
             'required' => 'Vui lòng nhập mô tả',
             'max' => 'Vui lòng nhập :attribute ít nhất :max ký tự.',
+        ],
+        'price' => [
+            'required' => 'Không được để trống giá tiền',
+            'numeric' => 'Giá tiền phải là một số'
+        ],
+        'qty' => [
+            'required' => 'Không được để trống số lượng',
+            'numeric' => 'số lượng phải là một số'
+        ],
+        'remaining' => [
+            'required' => 'Không được để trống số phòng',
+            'numeric' => 'Số phòng phải là một số',
+            'lte' => 'Số phòng trống khải nhỏ hơn :value phòng'
         ]
     ],
     'attributes' => [

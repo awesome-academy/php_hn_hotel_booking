@@ -11,7 +11,7 @@
                 <div class="card-header">
                     <h3 class="card-title">@lang('partner.register_hotel')</h3>
                 </div>
-                <form action="{{ route('partner.store') }}" method="post" role="form" enctype="multipart/form-data">
+                <form action="{{ route('partners.hotels.store') }}" method="post" role="form" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
                         <div class="row">
@@ -37,7 +37,7 @@
                                 <div class="form-group">
                                     <label>@lang('partner.province')</label>
                                     <select class="select2 w-100" name="province_id" data-placeholder="@lang('partner.province_select')">
-                                        @foreach($provinces as $province)
+                                        @foreach ($provinces as $province)
                                         <option value="{{ $province->id }}" {{ ($province->id == old('province_id')) ?'selected' : '' }}>{{ $province->name }}</option>
                                         @endforeach
                                     </select>
