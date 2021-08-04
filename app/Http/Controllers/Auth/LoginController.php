@@ -42,4 +42,34 @@ class LoginController extends Controller
 
         return redirect()->route('auth.loginForm')->with('message', json_encode($message));
     }
+
+    public function loginCustomer()
+    {
+        return view('customer.pages.auth.login');
+    }
+
+    public function handelLoginCustomer(LoginRequest $request)
+    {
+        $attrs = $request->except('_token');
+        if (Auth::attempt($attrs) && Auth::user()->role == config('user.customer')) {
+            return  redirect()->route('booking.index')->with('message', __('login_success'));
+        }
+        $message = [
+            'message' => __('login_failed'),
+            'status' => 'error',
+        ];
+
+        return redirect()->route('auth.customer.loginForm')->with('message', json_encode($message));
+    }
+
+    public function logOutCustomer()
+    {
+        Auth::logout();
+        $message = [
+            'message' => __('logout_success'),
+            'status' => 'success',
+        ];
+
+        return redirect()->route('auth.customer.loginForm')->with('message', json_encode($message));
+    }
 }

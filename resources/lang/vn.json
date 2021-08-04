@@ -16,5 +16,6 @@
     "approve_success": "Xét duyệt thành công",
     "deny_success": "Không chấp nhận thành công",
     "approve_failed": "Xét duyệt không thành công",
-    "deny_failed": "Từ chối thất bại"
+    "deny_failed": "Từ chối thất bại",
+    "phone_number": "Số điện thoại"
 }

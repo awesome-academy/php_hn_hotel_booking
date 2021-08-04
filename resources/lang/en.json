@@ -16,5 +16,6 @@
     "approve_success": "Approved successfully",
     "deny_success": "Denied successfully",
     "approve_failed": "Approved failed",
-    "deny_failed": "Denied failed"
+    "deny_failed": "Denied failed",
+    "phone_number": "Phone number"
 }

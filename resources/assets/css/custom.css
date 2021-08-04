@@ -1,0 +1,28 @@
+.login-wrap.custom {
+    margin-top: 75px !important;
+}
+
+.login-c1.custom {
+    height: 400px !important;
+}
+
+.login-c2.custom {
+    height: 430px !important;
+}
+
+.login-c3.custom {
+    margin-left: 0 !important;
+    width: 100% !important;
+    margin-top: 480px !important;
+}
+.login-c2.custom.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    border: 3px solid green;
+}
+.login-c2 .align-bottom {
+    position: absolute;
+    bottom: 25px;
+}
