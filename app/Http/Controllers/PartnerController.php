@@ -6,13 +6,14 @@ use App\Http\Requests\PartnerRequest;
 use App\Models\Hotel;
 use App\Models\Image;
 use App\Models\Province;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class PartnerController extends Controller
 {
     public function index()
     {
-        $hotels = Hotel::with('users')->where('user_id', Auth::id())->get();
+        $hotels = Hotel::with('users', 'province')->where('user_id', Auth::id())->get();
 
         return view('cms.pages.partner.index', compact('hotels'));
     }
@@ -29,23 +30,22 @@ class PartnerController extends Controller
         $attr = $request->all();
         $attr['user_id'] = Auth::id();
         $attr['rate'] = config('user.rate_partner');
-        $attr['status'] = config('user.pending');
+        $attr['status'] = config('user.pending_number');
         $hotel = Hotel::create($attr);
         // add images
         $images = $request->images;
+        $images_insert = array();
         foreach ($images as $img) {
             $image = array();
-            $image['imageable_type'] = config('user.type_hotel');
+            $image['imageable_type'] = config('user.type_room');
             $image['imageable_id'] = $hotel->id;
             $image['image'] = $img;
-            Image::create($image);
+            $image['created_at'] = Carbon::now();
+            $image['updated_at'] = Carbon::now();
+            array_push($images_insert, $image);
         }
+        Image::insert($images_insert);
 
-        $message = [
-            'message' => __('add_success'),
-            'status' => 'success',
-        ];
-
-        return redirect()->route('partner.index')->with('message', json_encode($message));
+        return redirect()->route('partners.hotels.index')->with('message', __('add_success'));
     }
 }

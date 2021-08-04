@@ -30,8 +30,16 @@
                                 <td>{{ $hotel->id }}</td>
                                 <td>{{ $hotel->name }}</td>
                                 <td>{{ $hotel->description }}</td>
-                                <td>{{ \App\Models\Province::find($hotel->province_id)->name }}</td>
-                                <td>{{ ($hotel->status == config('user.pending')) ? __('partner_pending'): __('partner_approved') }}</td>
+                                <td>{{ $hotel->province->name }}</td>
+                                <td>
+                                    @if ($hotel->status == config('user.approved_number'))
+                                        {{ config('user.approved') }}
+                                    @elseif ($hotel->status == config('user.denied_number'))
+                                        {{ config('user.denied') }}
+                                    @else
+                                        {{ config('user.pending') }}
+                                    @endif
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>

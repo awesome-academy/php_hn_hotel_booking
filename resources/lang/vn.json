@@ -12,5 +12,9 @@
     "cms_booking": "Quản lý đặt phòng",
     "copyright": "Đã đăng ký bản quyền",
     "version": "Phiên bản",
-    "limit_image": "Không nhập quá số hình ảnh cho phép"
+    "limit_image": "Không nhập quá số hình ảnh cho phép",
+    "approve_success": "Xét duyệt thành công",
+    "deny_success": "Không chấp nhận thành công",
+    "approve_failed": "Xét duyệt không thành công",
+    "deny_failed": "Từ chối thất bại"
 }
