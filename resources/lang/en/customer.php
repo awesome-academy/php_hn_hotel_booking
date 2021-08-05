@@ -50,4 +50,11 @@ return [
     'stateroom' => 'Stateroom',
     'subtotal' => 'Subtotal',
     'description' => 'Description',
+    'room_type' => 'Type of room',
+    'description' => 'Description',
+    'price' => 'Price',
+    'left' => 'Left',
+    'details' => 'Details',
+    'hotel' => 'Hotel',
+    'book' => 'Book',
 ];

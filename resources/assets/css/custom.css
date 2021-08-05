@@ -26,3 +26,8 @@
     position: absolute;
     bottom: 25px;
 }
+
+#pager-wrapper img{
+    width: 120px;
+    height: 68px;
+}

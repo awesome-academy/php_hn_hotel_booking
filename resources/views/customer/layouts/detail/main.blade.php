@@ -1,23 +1,19 @@
-<div class="col-md-8">
-    <div id="c-carousel" class="details-slider">
+<div class="col-md-8 details-slider">
+    <div id="c-carousel">
         <div id="wrapper">
             <div id="inner">
                 <div id="caroufredsel_wrapper2">
                     <div id="carousel">
-                        @if (isset($images))
-                            @foreach ($images as $image)
-                            <img src="{{ asset($image->image) }}" alt=""/>
-                            @endforeach
-                        @endif
+                        @foreach ($room->images as $image)
+                            <img src="{{ $image->image }}" alt="">
+                        @endforeach
                     </div>
                 </div>
                 <div id="pager-wrapper">
                     <div id="pager">
-                        @if (isset($images))
-                            @foreach ($images as $image)
-                                <img src="{{ asset($image->image) }}" alt=""/>
-                            @endforeach
-                        @endif
+                        @foreach ($room->images as $image)
+                            <img src="{{ $image->image }}" alt=""/>
+                        @endforeach
                     </div>
                 </div>
             </div>
