@@ -11,5 +11,8 @@ return [
     'booking' => 'Booking',
     'cms_booking' => 'CMS Booking',
     'or' => 'OR',
-    'have_account' => 'have account login nơ'
+    'have_account' => 'have account login now',
+    'website' => 'website',
+    'login_now' => 'Login now',
+    'lost_password' => 'Lost password?',
 ];

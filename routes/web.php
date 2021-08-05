@@ -23,6 +23,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::group(['prefix' => 'customer'], function () {
+    Route::get('/login', [LoginController::class, 'loginCustomer'])->name('auth.customer.loginForm');
+
+    Route::post('/login', [LoginController::class, 'handelLoginCustomer'])->name('auth.customer.login');
+
+    Route::get('/logOut', [LoginController::class, 'logOutCustomr'])->name('auth.customer.logout');
+
+    Route::get('/register', [RegisterController::class, 'registerCustomer'])->name('auth.customer.registerForm');
+
+    Route::post('/register', [RegisterController::class, 'handelRegisterCustomer'])->name('auth.customer.register');
+});
+
+
 Route::group(['prefix' => 'cms'], function () {
     Route::get('/login', [LoginController::class, 'login'])->name('auth.loginForm');
 

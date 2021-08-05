@@ -30,4 +30,27 @@ class RegisterController extends Controller
 
         return redirect()->route('auth.login')->with('message', json_encode($message));
     }
+
+    public function registerCustomer()
+    {
+        return view('customer.pages.auth.register');
+    }
+
+    public function handelRegisterCustomer(RegisterRequest $request)
+    {
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->role = config('user.customer');
+        $user->phone_number = $request->phoneNumber;
+        $user->save();
+
+        $message = [
+            'message' => __('register_success'),
+            'status' => 'success',
+        ];
+
+        return redirect()->route('auth.customer.login')->with('message', json_encode($message));
+    }
 }
