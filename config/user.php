@@ -16,4 +16,6 @@ return [
     'approved_number' => 0,
     'denied_number' => 1,
     'pending_number' => 2,
+    'vn' => 'vn',
+    'en' => 'en',
 ];
