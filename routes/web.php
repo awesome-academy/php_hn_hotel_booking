@@ -7,6 +7,7 @@ use \App\Http\Controllers\PartnerController;
 use \App\Http\Controllers\AdminController;
 use \App\Http\Controllers\Partner\RoomController;
 use \App\Http\Controllers\LanguageController;
+use \App\Http\Controllers\BookingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,3 +65,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['can:login.admin']], functio
 });
 
 Route::get('change-language/{language}', [LanguageController::class, 'changeLanguage'])->name('change-language');
+
+Route::group(['prefix' => 'booking'], function () {
+    Route::get('/hotels', [BookingController::class, 'index']);
+});

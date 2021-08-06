@@ -40,9 +40,9 @@
                         <div class="w50percent">
                             <div class="wh90percent textleft left">
                                 <span class="opensans size13">@lang('customer.adult')</span>
-                                <select class="form-control mySelectBoxClass">
+                                <select class="form-control">
                                     <option>1</option>
-                                    <option selected>2</option>
+                                    <option>2</option>
                                     <option>3</option>
                                     <option>4</option>
                                     <option>5</option>
@@ -52,9 +52,9 @@
                         <div class="w50percentlast">
                             <div class="wh90percent textleft right ohidden">
                                 <span class="opensans size13">@lang('customer.child')</span>
-                                <select class="form-control mySelectBoxClass">
+                                <select class="form-control">
                                     <option>0</option>
-                                    <option selected>1</option>
+                                    <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
                                     <option>4</option>
@@ -70,7 +70,7 @@
                 <div class="w50percent">
                     <div class="wh90percent textleft">
                         <span class="opensans size13"><b>@lang('customer.room') 2</b></span><br/>
-                        <div class="addroom2 block grey"><a onclick="addroom3()" class="grey cpointer">+ @lang('customer.add_room')</a> | <a onclick="removeroom2()" class="orange cpointer"><img src="images/delete.png" alt="delete"/></a></div>
+                        <div class="addroom2 block grey"><a onclick="addroom3()" class="grey cpointer">+ @lang('customer.add_room')</a> | <a onclick="removeroom2()" class="orange cpointer"><img src="{{ asset('bower_components/assets_travel/blue/images/delete.png') }}" alt="delete"/></a></div>
                     </div>
                 </div>
                 <div class="w50percentlast">
@@ -78,10 +78,10 @@
                         <div class="w50percent">
                             <div class="wh90percent textleft left">
                                 <span class="opensans size13">@lang('customer.adult')</span>
-                                <select class="form-control mySelectBoxClass">
+                                <select class="form-control">
                                     <option>1</option>
                                     <option>2</option>
-                                    <option selected>3</option>
+                                    <option>3</option>
                                     <option>4</option>
                                     <option>5</option>
                                 </select>
@@ -90,8 +90,8 @@
                         <div class="w50percentlast">
                             <div class="wh90percent textleft right">
                                 <span class="opensans size13">@lang('customer.child')</span>
-                                <select class="form-control mySelectBoxClass">
-                                    <option selected>0</option>
+                                <select class="form-control">
+                                    <option>0</option>
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
@@ -120,8 +120,8 @@
                         <div class="w50percent">
                             <div class="wh90percent textleft left">
                                 <span class="opensans size13">@lang('customer.adult')</span>
-                                <select class="form-control mySelectBoxClass">
-                                    <option selected>1</option>
+                                <select class="form-control">
+                                    <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
                                     <option>4</option>
@@ -132,8 +132,8 @@
                         <div class="w50percentlast">
                             <div class="wh90percent textleft right">
                                 <span class="opensans size13">@lang('customer.child')</span>
-                                <select class="form-control mySelectBoxClass">
-                                    <option selected>0</option>
+                                <select class="form-control">
+                                    <option>0</option>
                                     <option>1</option>
                                     <option>2</option>
                                     <option>3</option>
@@ -155,7 +155,7 @@
     <div class="line2"></div>
     <!-- Star ratings -->
     <button type="button" class="collapsebtn" data-toggle="collapse" data-target="#collapse1">
-        Star rating <span class="collapsearrow"></span>
+        @lang('star_rating') <span class="collapsearrow"></span>
     </button>
 
     <div id="collapse1" class="collapse in">
@@ -202,6 +202,9 @@
             <div class="layout-slider wh100percent">
                 <span class="cstyle09"><input id="Slider1" type="slider" name="price" value="400;700" /></span>
             </div>
+            <script type="text/javascript">
+                jQuery("#Slider1").slider({ from: 100, to: 1000, step: 5, smooth: true, round: 0, dimension: "&nbsp;$", skin: "round" });
+            </script>
         </div>
     </div>
     <!-- End of Price range -->
