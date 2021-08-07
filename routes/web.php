@@ -9,6 +9,7 @@ use \App\Http\Controllers\Partner\RoomController;
 use \App\Http\Controllers\LanguageController;
 use \App\Http\Controllers\BookingController;
 use \App\Http\Controllers\Customer\ProfileController;
+use \App\Http\Controllers\Partner\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,6 +64,19 @@ Route::group(['prefix' => 'partners', 'as' => 'partners.',
             Route::resource('rooms', RoomController::class)->only('index', 'create', 'store');
 
             Route::resource('hotels', PartnerController::class)->only('index', 'create', 'store');
+
+            Route::get('orders', [OrderController::class, 'index'])->name('order');
+
+            Route::post('order/upload/{booking}', [PartnerController::class, 'upload'])->name('order.upload')
+                ->middleware('can:order.approved,booking');
+
+            Route::post('order/deny/{booking}', [PartnerController::class, 'deny'])->name('order.ban')
+                ->middleware('can:order.approved,booking');
+
+            Route::post('order/checkout/{booking}', [PartnerController::class, 'checkout'])->name('order.paid')
+                ->middleware('can:order.checkout,booking');
+
+            Route::get('orders/detail', [OrderController::class, 'detail'])->name('order.detail');
         });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['can:login.admin']], function () {

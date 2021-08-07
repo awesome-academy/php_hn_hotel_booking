@@ -27,4 +27,11 @@ return [
     'qty_placeholder' => 'Please enter your quantity of room',
     'remaining' => 'Number of remain rooms',
     'remaining_placeholder' => 'Please enter rooms remain',
+    'customer' => 'Customer',
+    'phone' => 'Phone',
+    'total' => 'Total',
+    'orders' => 'Orders',
+    'list_order' => 'List order',
+    'order_detail' => 'Detail Order',
+    'close' => 'Close',
 ];

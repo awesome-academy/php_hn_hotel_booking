@@ -4,7 +4,6 @@
         <img src="{{ asset('bower_components/adminlte3/assets_adminlte3/images/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">{{ __('booking') }}</span>
     </a>
-
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
@@ -77,6 +76,23 @@
                             <a href="{{ route('partners.rooms.create') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>@lang('partner.add_room')</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item is-open">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            @lang('partner.orders')
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('partners.order') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>@lang('partner.list_order')</p>
                             </a>
                         </li>
                     </ul>

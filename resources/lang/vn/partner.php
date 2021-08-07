@@ -27,4 +27,11 @@ return [
     'qty_placeholder' => 'Hãy điền số phòng',
     'remaining' => 'Số phòng trống',
     'remaining_placeholder' => 'Hãy điền số phòng trống',
+    'customer' => 'Khách hàng',
+    'phone' => 'Điện thoại',
+    'total' => 'Tổng tiền',
+    'orders' => 'Đặt chỗ',
+    'list_order' => 'Danh sách',
+    'order_detail' => 'Chi tiết đơn hàng',
+    'close' => 'Đóng',
 ];
