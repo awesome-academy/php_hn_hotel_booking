@@ -20,6 +20,10 @@
     <link rel="stylesheet" href="{{ asset('bower_components/assets_travel/blue/plugins/jslider/css/jslider.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('bower_components/assets_travel/blue/plugins/jslider/css/jslider.round.css') }}" type="text/css">
 
+    <link rel="stylesheet" href="{{ asset('bower_components/font-awesome/css/all.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
+
     <!-- jQuery -->
     <script src="{{ asset('bower_components/assets_travel/blue/assets/js/jquery.v2.0.3.js') }}"></script>
     <script src="{{ asset('bower_components/assets_travel/blue/assets/js/jquery-ui.js') }}"></script>
@@ -31,7 +35,6 @@
     <script type="text/javascript" src="{{ asset('bower_components/assets_travel/blue/plugins/jslider/js/jquery.dependClass-0.1.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/assets_travel/blue/plugins/jslider/js/draggable-0.1.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bower_components/assets_travel/blue/plugins/jslider/js/jquery.slider.js') }}"></script>
-
 </head>
 <body id="top" class="thebg" >
 
@@ -91,6 +94,10 @@
 <script src="{{ asset('bower_components/assets_travel/blue/dist/js/bootstrap.min.js') }}"></script>
 
 <script src="{{ asset('bower_components/assets_travel/blue/assets/js/initialize-carousel-detailspage.js') }}"></script>
+
+<script src="{{ asset('assets/js/rating.js') }}"></script>
+
+<script src="{{ asset('assets/js/custom.js') }}"></script>
     @yield('script')
 </body>
 </html>

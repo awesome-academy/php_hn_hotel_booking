@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Policies\BookingPolicy;
 use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -28,5 +29,6 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('login.admin', UserPolicy::class . '@loginAdmin');
         Gate::define('login.partner', UserPolicy::class . '@loginPartner');
+        Gate::define('comment', BookingPolicy::class . '@comment');
     }
 }

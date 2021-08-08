@@ -31,3 +31,53 @@
     width: 120px;
     height: 68px;
 }
+
+.better-rating li{
+    display: inline-block;
+    margin: 10px 0;
+}
+.better-rating .profile-pic{
+    display: inline-block;
+}
+.better-rating .content{
+    display: inline-block;
+    max-width: 68%;
+    vertical-align: top;
+    background: #f7f7f7;
+    padding: 20px;
+}
+.profile-rating-wrapper {
+    display: inline-block;
+    text-align: center;
+}
+.better-rating.slider {}
+
+#better-rating-form {}
+
+#better-rating-form input, #better-rating-form textarea{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 3px;
+    border: 1px solid #a5a5a5;
+}
+
+#better-rating-form button {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 3px;
+    border: 1px solid #a5a5a5;
+    cursor: pointer;
+}
+.rating i{
+    cursor: pointer;
+}
+.selected {
+    color: #ff3f00;
+}
+.hover {
+    color: darkorange;
+}
+.rating i:hover{
+    color: darkorange;
+}
