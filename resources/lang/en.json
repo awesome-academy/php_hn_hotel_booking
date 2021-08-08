@@ -17,5 +17,11 @@
     "deny_success": "Denied successfully",
     "approve_failed": "Approved failed",
     "deny_failed": "Denied failed",
-    "phone_number": "Phone number"
+    "phone_number": "Phone number",
+    "comment_success": "Send comment successfully",
+    "pending": "Pending",
+    "approved": "Approved",
+    "denied": "Denied",
+    "paid": "Paid",
+    "unpaid": "Unpaid"
 }
