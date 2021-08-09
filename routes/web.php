@@ -68,4 +68,6 @@ Route::get('change-language/{language}', [LanguageController::class, 'changeLang
 
 Route::group(['prefix' => 'booking'], function () {
     Route::get('/hotels', [BookingController::class, 'index']);
+
+    Route::get('/hotel/{id}', [BookingController::class, 'detailHotel']);
 });
