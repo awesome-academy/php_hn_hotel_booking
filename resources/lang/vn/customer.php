@@ -70,4 +70,5 @@ return [
     'register_for_partner' => 'Đăng ký cho đối tác',
     'partner' => 'Đăng ký cho đối tác',
     'user_action' => 'Hành động',
+    'not_found_hotel' => 'Không tìm thấy khách sạn',
 ];

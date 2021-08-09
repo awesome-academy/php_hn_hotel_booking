@@ -10,143 +10,49 @@
         </div>
         <div class="clearfix"></div><br/>
         <!-- HOTELS TAB -->
-        <div class="hotelstab2 none">
-            <span class="opensans size13">@lang('customer.where_do_u_want_to_go')</span>
-            <input type="text" class="form-control" placeholder="@lang('customer.ha_noi')">
-            <div class="clearfix pbottom15"></div>
-            <div class="w50percent">
-                <div class="wh90percent textleft">
-                    <span class="opensans size13">@lang('customer.check_in_date')</span>
-                    <input type="text" class="form-control mySelectCalendar" id="datepicker" placeholder="mm/dd/yyyy"/>
-                </div>
-            </div>
-            <div class="w50percentlast">
-                <div class="wh90percent textleft right">
-                    <span class="opensans size13">@lang('customer.check_out_date')</span>
-                    <input type="text" class="form-control mySelectCalendar" id="datepicker2" placeholder="mm/dd/yyyy"/>
-                </div>
-            </div>
-            <div class="clearfix pbottom15"></div>
-            <div class="room1" >
+        <form action="{{ route('booking.hotels.search') }}" method="get">
+            <div class="hotelstab2 none">
+                <span class="opensans size13">@lang('customer.where_do_u_want_to_go')</span>
+                <select name="province" class="form-control">
+                    @foreach($provinces as $province)
+                        <option value="{{ $province->id }}" {{ $province->id == old('province', $request->province ?? null) ? "selected" : null }}>{{ $province->name }}</option>
+                    @endforeach
+                </select>
+                <div class="clearfix pbottom15"></div>
                 <div class="w50percent">
-                    <div class="wh90percent textleft">
-                        <span class="opensans size13"><b>@lang('customer.room') 1</b></span><br/>
+                    <div class="">
+                        <span class="opensans size13">@lang('customer.check_in_date')</span>
+                        <input type="date" name="checkIn" value="{{ old('checkIn', $request->checkIn ?? null) }}" class="form-control"/>
+                    </div>
+                </div>
+                <div class="w50percentlast">
+                    <div class="wh90percent right">
+                        <span class="opensans size13">@lang('customer.check_out_date')</span>
+                        <input type="date" name="checkOut" value="{{ old('checkOut', $request->checkOut ?? null) }}" class="form-control"/>
+                    </div>
+                </div>
+                <div class="d-flex w-100 pt-5">
+                    <div class="w-50">
+                        <span>@lang('customer.room')</span>
+                        <input type="number" name="room" value="{{old('room', $request->room ?? 1) }}" class="form-control"/>
+                    </div>
+                    <div class="w-50">
+                        <span>@lang('customer.adult')</span>
+                        <input type="number" name="adult" value="{{old('adult', $request->adult ?? 1) }}" class="form-control"/>
+                    </div>
+                    <div class="w-50">
+                        <span>@lang('customer.child')</span>
+                        <input type="number" name="child" value="{{old('child', $request->child ?? 1) }}" class="form-control"/>
+                    </div>
+                </div>
+                <div>
+                    <button type="submit" class="btn-search3">
+                        @lang('customer.search')
+                    </button>
+                </div>
+            </div>
 
-                        <div class="addroom1 block"><a onclick="addroom2()" class="grey cpointer">+ @lang('customer.add_room')</a></div>
-                    </div>
-                </div>
-                <div class="w50percentlast">
-                    <div class="wh90percent textleft right ohidden">
-                        <div class="w50percent">
-                            <div class="wh90percent textleft left">
-                                <span class="opensans size13">@lang('customer.adult')</span>
-                                <select class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="w50percentlast">
-                            <div class="wh90percent textleft right ohidden">
-                                <span class="opensans size13">@lang('customer.child')</span>
-                                <select class="form-control">
-                                    <option>0</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="room2 none">
-                <div class="clearfix"></div><div class="line1"></div>
-                <div class="w50percent">
-                    <div class="wh90percent textleft">
-                        <span class="opensans size13"><b>@lang('customer.room') 2</b></span><br/>
-                        <div class="addroom2 block grey"><a onclick="addroom3()" class="grey cpointer">+ @lang('customer.add_room')</a> | <a onclick="removeroom2()" class="orange cpointer"><img src="{{ asset('bower_components/assets_travel/blue/images/delete.png') }}" alt="delete"/></a></div>
-                    </div>
-                </div>
-                <div class="w50percentlast">
-                    <div class="wh90percent textleft right">
-                        <div class="w50percent">
-                            <div class="wh90percent textleft left">
-                                <span class="opensans size13">@lang('customer.adult')</span>
-                                <select class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="w50percentlast">
-                            <div class="wh90percent textleft right">
-                                <span class="opensans size13">@lang('customer.child')</span>
-                                <select class="form-control">
-                                    <option>0</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="room3 none">
-                <div class="clearfix"></div><div class="line1"></div>
-                <div class="w50percent">
-                    <div class="wh90percent textleft">
-                        <span class="opensans size13"><b>@lang('customer.room') 3</b></span><br/>
-                        <div class="addroom3 block grey"><a onclick="addroom3()" class="grey cpointer">+ @lang('customer.add_room')</a> |
-                            <a onclick="removeroom3()" class="orange cpointer">
-                                <img src="{{ asset('bower_components/assets_travel/blue/images/delete.png') }}" alt="delete"/>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="w50percentlast">
-                    <div class="wh90percent textleft right">
-                        <div class="w50percent">
-                            <div class="wh90percent textleft left">
-                                <span class="opensans size13">@lang('customer.adult')</span>
-                                <select class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="w50percentlast">
-                            <div class="wh90percent textleft right">
-                                <span class="opensans size13">@lang('customer.child')</span>
-                                <select class="form-control">
-                                    <option>0</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div><div class="clearfix"></div>
-            <button type="submit" class="btn-search3">@lang('customer.search')</button>
-        </div>
+        </form>
         <!-- END OF HOTELS TAB -->
     </div>
     <!-- END OF BOOK FILTERS -->

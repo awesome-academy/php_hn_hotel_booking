@@ -69,5 +69,6 @@ return [
     'register_for_customer' => 'Register for customer',
     'register_for_partner' => 'Register for customer',
     'partner' => 'Register for partner',
-    'user_action' => 'Action'
+    'user_action' => 'Action',
+    'not_found_hotel' => 'Not found hotel',
 ];

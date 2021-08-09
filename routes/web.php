@@ -94,12 +94,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['can:login.admin']], functio
 Route::get('change-language/{language}', [LanguageController::class, 'changeLanguage'])->name('change-language');
 
 Route::group(['prefix' => 'booking'], function () {
-
     Route::get('/hotel/{id}', [BookingController::class, 'detailHotel'])->name('booking.detail-hotel');
 
     Route::get('room/{id}', [BookingController::class, 'roomDetail'])->name('booking.detail-room');
-
-    Route::get('/hotel/{id}', [BookingController::class, 'detailHotel'])->name('booking.detail-hotel');
 
     Route::get('/hotels', [BookingController::class, 'index'])->name('booking.index');
 
@@ -113,4 +110,6 @@ Route::group(['prefix' => 'booking'], function () {
         ->middleware('auth');
 
     Route::post('checkout/{hotelId}', [CheckoutController::class, 'checkOut'])->name('booking.checkout');
+
+    Route::get('hotels/search', [BookingController::class, 'search'])->name('booking.hotels.search');
 });
