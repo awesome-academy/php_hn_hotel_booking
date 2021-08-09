@@ -50,4 +50,11 @@ return [
     'stateroom' => 'Phòng',
     'subtotal' => 'Tổng',
     'description' => 'Mô tả',
+    'room_type' => 'Kiểu phòng',
+    'description' => 'Mô tả',
+    'price' => 'Giá',
+    'left' => 'Còn lại',
+    'details' => 'Chi tiết',
+    'hotel' => 'Khách sạn',
+    'book' => 'Đặt phòng',
 ];

@@ -22,4 +22,13 @@ class BookingController extends Controller
 
         return view('customer.pages.detail', compact('rooms', 'images'));
     }
+    
+    public function roomDetail($id)
+    {
+        $room = Room::with(['images', 'type', 'hotel'])->where('id', $id)->first();
+        if (!empty($room)) {
+            return view('customer.pages.room-detail', compact('room'));
+        }
+        abort(404, 'Page not found');
+    }
 }
