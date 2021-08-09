@@ -9,7 +9,7 @@ return [
     'rate_partner' => 0,
     'type_hotel' => 'hotel',
     'type_room' => 'room',
-    'number_of_hotel' => 2,
+    'number_of_hotel' => 5,
     'pending' => 'Pending',
     'approved' => 'Approved',
     'denied' => 'Denied',
