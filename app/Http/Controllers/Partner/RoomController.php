@@ -15,7 +15,7 @@ class RoomController extends Controller
 {
     public function index()
     {
-        $rooms = Room::where('user_id', Auth::user()->id)->get();
+        $rooms = Room::with(['hotel', 'type'])->where('user_id', Auth::user()->id)->get();
 
         return view('cms.pages.partner.room.index', compact('rooms'));
     }

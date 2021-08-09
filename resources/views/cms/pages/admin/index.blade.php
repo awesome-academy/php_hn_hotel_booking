@@ -45,6 +45,7 @@
                                         <a href=""><button class="btn btn-warning btn-sm rounded-0" type="button" data-toggle="tooltip"
                                                            data-placement="top" title="@lang('admin.hotel.view')"><i class="fa fa-eye"></i></button>
                                         </a>
+                                        @if ($hotel->status != config('user.approved_number'))
                                         <form action="{{ route('admin.hotel.upload') }}" method="post">
                                             @csrf
                                             <input type="hidden" name="id" value="{{ $hotel->id }}">
@@ -52,6 +53,8 @@
                                             <button class="btn btn-success btn-sm rounded-0" type="submit" data-toggle="tooltip"
                                                     data-placement="top" title="@lang('admin.hotel.approved')"><i class="fa fa-upload"></i></button>
                                         </form>
+                                        @endif
+                                        @if ($hotel->status != config('user.denied_number'))
                                         <form action="{{ route('admin.hotel.ban') }}" method="post">
                                             @csrf
                                             <input type="hidden" name="id" value="{{ $hotel->id }}">
@@ -59,6 +62,7 @@
                                             <button class="btn btn-danger btn-sm rounded-0" type="submit" data-toggle="tooltip"
                                                     data-placement="top" title="@lang('admin.hotel.denied')"><i class="fa fa-ban"></i></button>
                                         </form>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
