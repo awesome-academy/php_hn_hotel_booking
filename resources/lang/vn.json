@@ -17,5 +17,11 @@
     "deny_success": "Không chấp nhận thành công",
     "approve_failed": "Xét duyệt không thành công",
     "deny_failed": "Từ chối thất bại",
-    "phone_number": "Số điện thoại"
+    "phone_number": "Số điện thoại",
+    "comment_success": "Gửi bình luận thành công",
+    "pending": "Đang xử lý",
+    "approved": "Đã duyệt",
+    "denied": "Bị từ chối",
+    "paid": "Đã thanh toán",
+    "unpaid": "Chưa thanh toán"
 }
