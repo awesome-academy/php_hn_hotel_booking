@@ -10,25 +10,25 @@ class BookingController extends Controller
     public function index()
     {
         $hotels = Hotel::with('images')->where('status', config('user.approved_number'))->get();
-
-        return view('customer.pages.index', compact('hotels'));
+        if (!empty($hotels)) {
+            return view('customer.pages.index', compact('hotels'));
+        }
     }
 
     public function detailHotel($id)
     {
         $hotel = Hotel::findOrFail($id);
-        $rooms = Room::with(['images', 'type'])->where('hotel_id', $id)->get();
+        $rooms = $hotel->rooms;
         $images = $hotel->images;
+        $image = $hotel->images->first()->image;
 
-        return view('customer.pages.detail', compact('rooms', 'images'));
+        return view('customer.pages.detail', compact('rooms', 'image', 'images'));
     }
-    
+
     public function roomDetail($id)
     {
-        $room = Room::with(['images', 'type', 'hotel'])->where('id', $id)->first();
-        if (!empty($room)) {
-            return view('customer.pages.room-detail', compact('room'));
-        }
-        abort(404, 'Page not found');
+        $room = Room::findOrFail($id);
+
+        return view('customer.pages.room-detail', compact('room'));
     }
 }

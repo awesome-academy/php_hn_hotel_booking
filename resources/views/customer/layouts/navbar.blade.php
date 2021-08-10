@@ -9,7 +9,9 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="#html" class="navbar-brand"><img src="{{ asset('bower_components/assets_travel/blue/images/logo.png') }}" class="logo"/></a>
+                    <a href="{{ route('booking.index') }}" class="navbar-brand">
+                        <img src="{{ asset('bower_components/assets_travel/blue/images/logo.png') }}" class="logo"/>
+                    </a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
