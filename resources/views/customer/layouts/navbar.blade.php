@@ -13,7 +13,13 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">@lang('customer.hotels')</a></li>
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">@lang('customer.profile')<b class="lightcaret mt-2"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ route('customer.profile') }}">@lang('customer.order')</a></li>
+                                <li><a href="{{ route('auth.customer.logout') }}">{{__('logout')}}</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </div>

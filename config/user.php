@@ -18,4 +18,8 @@ return [
     'pending_number' => 2,
     'vn' => 'vn',
     'en' => 'en',
+    'paid' => 'Paid',
+    'unpaid' => 'Unpaid',
+    'paid_number' => 3,
+    'unpaid_number' => 4,
 ];

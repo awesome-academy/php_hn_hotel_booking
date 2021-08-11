@@ -8,6 +8,7 @@ use \App\Http\Controllers\AdminController;
 use \App\Http\Controllers\Partner\RoomController;
 use \App\Http\Controllers\LanguageController;
 use \App\Http\Controllers\BookingController;
+use \App\Http\Controllers\Customer\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,11 +30,19 @@ Route::group(['prefix' => 'customer'], function () {
 
     Route::post('/login', [LoginController::class, 'handelLoginCustomer'])->name('auth.customer.login');
 
-    Route::get('/logOut', [LoginController::class, 'logOutCustomr'])->name('auth.customer.logout');
+    Route::get('/logOut', [LoginController::class, 'logOutCustomer'])->name('auth.customer.logout');
 
     Route::get('/register', [RegisterController::class, 'registerCustomer'])->name('auth.customer.registerForm');
 
     Route::post('/register', [RegisterController::class, 'handelRegisterCustomer'])->name('auth.customer.register');
+
+    Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth')->name('customer.profile');
+
+    Route::get('/comment/{booking}', [ProfileController::class, 'comment'])
+        ->middleware(['auth', 'can:comment,booking'])->name('customer.reviewForm');
+
+    Route::post('/comment/{id}', [ProfileController::class, 'postComment'])
+        ->middleware(['auth', 'can:comment,booking'])->name('customer.review');
 });
 
 
