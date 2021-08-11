@@ -24,5 +24,10 @@
     "denied": "Bị từ chối",
     "paid": "Đã thanh toán",
     "unpaid": "Chưa thanh toán",
-    "paid_success": "Thanh toán thành công"
+    "paid_success": "Thanh toán thành công",
+    "over_limit_room": "Xin lỗi phòng này đã hết",
+    "remove_success": "Xóa 1 phòng khỏi danh sách thành công",
+    "checkout": "Thanh toán",
+    "checkout_success": "Thanh toán thành công",
+    "delete_success": "Xóa thành công"
 }

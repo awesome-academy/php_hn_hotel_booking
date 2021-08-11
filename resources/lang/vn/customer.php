@@ -57,4 +57,17 @@ return [
     'details' => 'Chi tiết',
     'hotel' => 'Khách sạn',
     'book' => 'Đặt phòng',
+    'who_traveling' => 'Ai đang đi du lịch ?',
+    '18_or_order' => 'Hãy nói cho chúng tôi ai bạn đã đủ 18 tuổi hay chưa',
+    'contact_name' => 'Họ và tên',
+    'first_and_last_name' => 'Họ và tên',
+    'phone_number' => 'Số điện thoại',
+    'booking_note' => 'Thông tin cần lưu ý',
+    'booking_note_content' => 'Đặt phòng này không được hoàn lại và không thể thay đổi hoặc hủy bỏ.',
+    'agree_policy' => 'Bằng cách chọn để hoàn tất việc đặt chỗ này, tôi xác nhận rằng tôi đã đọc và
+     chấp nhận các quy tắc và điều khoản hạn chế và điều kiện cũng như chính sách bảo mật.',
+    'complete_booking' => 'Thanh toán',
+    'name_placeholder' => 'Nhập tên của bạn',
+    'phone_placeholder' => 'Nhập số điện thoại',
+    'qty' => 'Số lượng',
 ];
