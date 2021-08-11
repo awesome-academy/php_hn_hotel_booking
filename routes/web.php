@@ -76,9 +76,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['can:login.admin']], functio
 Route::get('change-language/{language}', [LanguageController::class, 'changeLanguage'])->name('change-language');
 
 Route::group(['prefix' => 'booking'], function () {
-    Route::get('/hotels', [BookingController::class, 'index']);
+    Route::get('/hotels', [BookingController::class, 'index'])->name('booking.index');
 
-    Route::get('/hotel/{id}', [BookingController::class, 'detailHotel']);
-    
-    Route::get('room/{id}', [BookingController::class, 'roomDetail']);
+    Route::get('/hotel/{id}', [BookingController::class, 'detailHotel'])->name('booking.detail-hotel');
+
+    Route::get('room/{id}', [BookingController::class, 'roomDetail'])->name('booking.detail-room');
 });
