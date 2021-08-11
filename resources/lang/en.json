@@ -23,5 +23,6 @@
     "approved": "Approved",
     "denied": "Denied",
     "paid": "Paid",
-    "unpaid": "Unpaid"
+    "unpaid": "Unpaid",
+    "paid_success": "Paid successfully"
 }

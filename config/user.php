@@ -22,4 +22,5 @@ return [
     'unpaid' => 'Unpaid',
     'paid_number' => 3,
     'unpaid_number' => 4,
+    'paginate_order' => 5,
 ];

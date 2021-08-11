@@ -23,5 +23,6 @@
     "approved": "Đã duyệt",
     "denied": "Bị từ chối",
     "paid": "Đã thanh toán",
-    "unpaid": "Chưa thanh toán"
+    "unpaid": "Chưa thanh toán",
+    "paid_success": "Thanh toán thành công"
 }

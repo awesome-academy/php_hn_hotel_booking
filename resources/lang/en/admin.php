@@ -11,5 +11,6 @@ return [
         'approved' => 'Approved',
         'denied' => 'Denied',
         'view' => 'View',
+        'paid' => 'paid',
     ]
 ];
