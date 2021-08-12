@@ -24,5 +24,10 @@
     "denied": "Denied",
     "paid": "Paid",
     "unpaid": "Unpaid",
-    "paid_success": "Paid successfully"
+    "paid_success": "Paid successfully",
+    "over_limit_room": "Over limit room",
+    "remove_success": "Remove 1 room success",
+    "checkout": "CheckOut",
+    "checkout_success" : "Checkout successfully",
+    "delete_success": "Delete successfully"
 }

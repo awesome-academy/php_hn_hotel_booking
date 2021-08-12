@@ -57,4 +57,17 @@ return [
     'details' => 'Details',
     'hotel' => 'Hotel',
     'book' => 'Book',
+    'who_traveling' => 'Who \'s traveling',
+    '18_or_order' => 'Please tell us who will be checking in. Must be 18 or older.',
+    'contact_name' => 'Contact name',
+    'first_and_last_name' => 'First and Last Name',
+    'phone_number' => 'Phone number',
+    'booking_note' => 'Important information about your booking',
+    'booking_note_content' => 'This reservation is non-refundable and cannot be changed or canceled.',
+    'agree_policy' => 'By selecting to complete this booking I acknowledge that
+    I have read and accept the rules & restrictions terms & conditions , and privacy policy.',
+    'complete_booking' => 'Complete booking',
+    'name_placeholder' => 'Enter name',
+    'phone_placeholder' => 'Enter phone number',
+    'qty' => 'Quantity',
 ];
