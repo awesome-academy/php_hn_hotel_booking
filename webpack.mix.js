@@ -13,3 +13,4 @@ const mix = require('laravel-mix');
 
 mix.copy('node_modules/sweetalert2/dist/sweetalert2.all.min.js', 'public/assets/js/app.js')
     .copy('resources/assets','public/assets')
+    .js('resources/js/app.js', 'public/assets/js/in18.js')

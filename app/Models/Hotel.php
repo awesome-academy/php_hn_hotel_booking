@@ -16,6 +16,7 @@ class Hotel extends Model
         'user_id',
         'rate',
         'status',
+        'avg_price',
     ];
 
     public function users()

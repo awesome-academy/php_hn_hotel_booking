@@ -26,12 +26,133 @@
     position: absolute;
     bottom: 25px;
 }
-
-#pager-wrapper img{
-    width: 120px;
-    height: 68px;
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    /* font-family: ; */
+}
+/* color: #161616; */
+/*   color in put: #5d5d5d; */
+.header {
+    /* height: 50px; */
+    position: relative;
+    min-height: 5vh;
+}
+.header .box {
+    min-height: 5vh;
+    /* border-bottom:  ; */
+    background-color: rgba(250, 250, 250, 255);
+}
+.header .box .item button {
+    background-color: transparent;
+}
+.header .box .box__center .item span {
+    font-size: 18px;
+    font-weight: 500;
+    color: #161616;
 }
 
+/* =========================== */
+/* ========header ============ */
+/* ============================== */
+.footer {
+    min-height: 5vh;
+    position: relative;
+}
+.footer .box {
+    background-color: #ebebeb;
+    height: 40px;
+}
+.footer .box .box__text {
+    color: #8a8a8a;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.footer .box .box__text span {
+    color: #727272;
+    font-weight: 700;
+}
+
+/* =========================== */
+/* ======== footer ============ */
+/* ============================== */
+
+/* =========================== */
+/* ========order ============ */
+/* ============================== */
+
+.write-review {
+    width: 500px;
+    margin: auto;
+    background-color: #fff;
+}
+.write-review .title {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.write-review .title .title__one {
+    font-size: 25px;
+    font-weight: bold;
+    color: #353535;
+}
+
+.write-review .title .title__two {
+    padding-top: 5px;
+    font-size: 16px;
+    color: #ff8201;
+    font-weight: 500;
+}
+.write-review .box .box__rating {
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+.write-review .box .box__rating .box__rating-label {
+    font-size: 18px;
+    padding-bottom: 6px;
+    font-weight: 500;
+    color: #353535;
+}
+.write-review .box .box__input {
+    padding-bottom: 30px;
+}
+.write-review .box .box__input .box__input-label {
+    padding-bottom: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #353535;
+}
+.write-review .box .box__btn button {
+    background-color: #ff8201;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.d-flex {
+    display: flex;
+}
+.w-100 {
+    width: 100%;
+}
+.w-50 {
+    width: 50%;
+}
+.pt-5 {
+    padding-top: 10px;
+}
+/* =========================== */
+/* ========order ============ */
+
+
+/* ========   rating ======*/
+.better-rating {}
 .better-rating li{
     display: inline-block;
     margin: 10px 0;

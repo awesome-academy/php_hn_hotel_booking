@@ -42,6 +42,14 @@
                                         @endforeach
                                     </select>
                                 </div>
+                                @error('avg_price')
+                                <small class="text-danger rule">{{ $message }}</small>
+                                @enderror
+                                <div class="form-group">
+                                    <label for="title">@lang('partner.price')</label>
+                                    <input type="number" name="avg_price" class="form-control" value="{{ old('avg_price', $request->description ?? null) }}"
+                                           placeholder="@lang('partner.price_placeholder')">
+                                </div>
                             </div>
                             <div class="form-group" id="slide-container">
                                 @error('images')

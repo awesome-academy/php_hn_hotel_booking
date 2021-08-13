@@ -10,6 +10,8 @@ use \App\Http\Controllers\LanguageController;
 use \App\Http\Controllers\BookingController;
 use \App\Http\Controllers\Customer\ProfileController;
 use \App\Http\Controllers\Partner\OrderController;
+use \App\Http\Controllers\CartController;
+use \App\Http\Controllers\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,7 +44,7 @@ Route::group(['prefix' => 'customer'], function () {
     Route::get('/comment/{booking}', [ProfileController::class, 'comment'])
         ->middleware(['auth', 'can:comment,booking'])->name('customer.reviewForm');
 
-    Route::post('/comment/{id}', [ProfileController::class, 'postComment'])
+    Route::post('/comment/{booking}', [ProfileController::class, 'postComment'])
         ->middleware(['auth', 'can:comment,booking'])->name('customer.review');
 });
 
@@ -95,4 +97,19 @@ Route::group(['prefix' => 'booking'], function () {
     Route::get('/hotel/{id}', [BookingController::class, 'detailHotel'])->name('booking.detail-hotel');
 
     Route::get('room/{id}', [BookingController::class, 'roomDetail'])->name('booking.detail-room');
+
+    Route::get('/hotel/{id}', [BookingController::class, 'detailHotel'])->name('booking.detail-hotel');
+
+    Route::get('/hotels', [BookingController::class, 'index'])->name('booking.index');
+
+    Route::get('/add-to-cart', [CartController::class, 'addToCart'])->name('booking.add-to-cart');
+
+    Route::get('/remove-room', [CartController::class, 'removeRoom'])->name('booking.remove-room');
+
+    Route::get('/sub-room', [CartController::class, 'subRoom'])->name('booking.sub-room');
+
+    Route::get('checkout/{hotelId}', [CheckoutController::class, 'getInfo'])->name('booking.info')
+        ->middleware('auth');
+
+    Route::post('checkout/{hotelId}', [CheckoutController::class, 'checkOut'])->name('booking.checkout');
 });
