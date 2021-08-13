@@ -21,7 +21,7 @@
             <span class="dark size16 bold">@lang('customer.left'): {{ $room->remaining }}</span><br>
         </div>
         <div class="hpadding20">
-            <a href="{{ route('booking.add_to_cart') }}" class="booknow margtop20 btnmarg">@lang('customer.book')</a>
+            <a href="{{ route('booking.add-to-cart', $room->id) }}" class="booknow margtop20 btnmarg">@lang('customer.book')</a>
         </div>
     </div>
 </div>

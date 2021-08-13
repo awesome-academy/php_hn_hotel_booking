@@ -23,7 +23,6 @@
     <link rel="stylesheet" href="{{ asset('bower_components/font-awesome/css/all.css') }}">
 
     <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
-
     <!-- jQuery -->
     <script src="{{ asset('bower_components/assets_travel/blue/assets/js/jquery.v2.0.3.js') }}"></script>
     <script src="{{ asset('bower_components/assets_travel/blue/assets/js/jquery-ui.js') }}"></script>
@@ -98,6 +97,20 @@
 <script src="{{ asset('assets/js/rating.js') }}"></script>
 
 <script src="{{ asset('assets/js/custom.js') }}"></script>
+
+<script src="{{ asset('assets/js/cart.js') }}"></script>
+
+<script src="{{ asset('assets/js/in18.js') }}"></script>
+    @include('cms.sweetAlert2')
+<script>
+    @if (session('message'))
+    Toast.fire({
+        icon: 'success',
+        title: '{{ session('message') }}'
+    })
+    @endif
+</script>
+    @translations
     @yield('script')
 </body>
 </html>

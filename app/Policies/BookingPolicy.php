@@ -96,7 +96,7 @@ class BookingPolicy
     {
         return Booking::find($booking)->status == config('user.paid_number');
     }
-    
+
     public function approved(User $user, $booking)
     {
         return Booking::find($booking)->status == config('user.pending_number');

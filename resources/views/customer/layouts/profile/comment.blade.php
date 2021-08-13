@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-12 title">
             <div class="title__one">
-                <span>@lang('send_review')</span>
+                <span>@lang('customer.send_review')</span>
             </div>
         </div>
         <form action="{{ route('customer.review', $id) }}" method="post">

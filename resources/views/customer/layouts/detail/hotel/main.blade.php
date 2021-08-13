@@ -73,9 +73,7 @@
                                 <span class="opensans green size24">${{ $room->price }}</span><br/>
                                 <span class="opensans lightgrey size12">/@lang('customer.night')</span><br/><br/>
                                 <span class="lred bold">{{ $room->remaining }} @lang('customer.left')</span><br/><br/>
-                                <a href="{{ route('booking.add_to_cart') }}">
-                                    <button class="bookbtn mt1">@lang('customer.book')</button>
-                                </a>
+                                <button class="bookbtn add-cart mt1 add-cart" data-roomId={{ $room->id }} data-hotelid={{ $hotel->id }}>@lang('customer.book')</button>
                             </div>
                         </div>
                         <div class="clearfix"></div>

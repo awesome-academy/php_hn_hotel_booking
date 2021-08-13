@@ -23,4 +23,5 @@ return [
     'paid_number' => 3,
     'unpaid_number' => 4,
     'paginate_order' => 5,
+    'number_of_slide' => 7,
 ];

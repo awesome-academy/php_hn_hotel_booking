@@ -41,7 +41,7 @@ class PartnerController extends Controller
         $images_insert = array();
         foreach ($images as $img) {
             $image = array();
-            $image['imageable_type'] = config('user.type_room');
+            $image['imageable_type'] = config('user.type_hotel');
             $image['imageable_id'] = $hotel->id;
             $image['image'] = $img;
             $image['created_at'] = Carbon::now();

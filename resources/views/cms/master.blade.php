@@ -60,6 +60,10 @@
 
 <script src=" {{ asset('assets/lfm/lfm.js') }}"></script>
 
+<script src=" {{ asset('assets/js/in18.js') }}"></script>
+
+<script src=" {{ asset('assets/js/custom.js') }}"></script>
+
 @include('cms.sweetAlert2')
 
 <script>
@@ -67,10 +71,12 @@
         multiple: true,
         name: 'images',
         element: '#slider_container',
-        limit: 3,
+        limit: '{{ config('user.number_of_slide') }}',
         message: '{{ __('limit_image') }}'
     });
 </script>
+
+    @translations
 
     @yield('js')
 
