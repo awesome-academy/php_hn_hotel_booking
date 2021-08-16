@@ -19,3 +19,4 @@ yarn-error.log
 /.idea
 /public/assets
 /public/vendor
+/coverage
