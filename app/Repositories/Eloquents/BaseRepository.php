@@ -67,4 +67,16 @@ abstract class BaseRepository implements BaseRepositoryInterface
 
         return false;
     }
+
+    public function insert($data)
+    {
+        return $this->model->insert($data);
+    }
+
+    public function findOrFail($id)
+    {
+        $result = $this->model->findOrFail($id);
+
+        return $result;
+    }
 }
