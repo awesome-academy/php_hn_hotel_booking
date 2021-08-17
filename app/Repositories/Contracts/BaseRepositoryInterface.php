@@ -34,4 +34,18 @@ interface BaseRepositoryInterface
      * @return mixed
      */
     public function delete($id);
+
+    /**
+     * Create mutiple data
+     * @param array $attributes
+     * @return mixed
+     */
+    public function insert($data);
+
+    /**
+     * Get one
+     * @param $id
+     * @return mixed
+     */
+    public function findOrFail($id);
 }

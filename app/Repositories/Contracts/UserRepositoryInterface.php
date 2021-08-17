@@ -9,4 +9,12 @@ interface UserRepositoryInterface extends BaseRepositoryInterface
      * @return mixed
      */
     public function getUser();
+
+    /**
+     * get hotel for Partner view
+     * @param null
+     * @return mixed
+     */
+
+    public function getHotelForPartner();
 }
