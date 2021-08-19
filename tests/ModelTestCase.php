@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class ModelTestCase extends TestCase
 {
@@ -50,6 +51,13 @@ class ModelTestCase extends TestCase
     protected function assertMorphManyRelation($relation, $name)
     {
         $this->assertInstanceOf(MorphMany::class, $relation);
+        $this->assertEquals($name . '_type', $relation->getMorphType());
+        $this->assertEquals($name . '_id', $relation->getForeignKeyName());
+    }
+
+    protected function assertMorphToRelation($relation, $name)
+    {
+        $this->assertInstanceOf(MorphTo::class, $relation);
         $this->assertEquals($name . '_type', $relation->getMorphType());
         $this->assertEquals($name . '_id', $relation->getForeignKeyName());
     }

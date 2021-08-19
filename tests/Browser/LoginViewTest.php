@@ -19,12 +19,16 @@ class LoginViewTest extends DuskTestCase
         $password = "11111111";
         $this->browse(function (Browser $browser) use ($email, $password) {
             $browser->visit(new LoginPage())
+                ->assertRouteIs('auth.customer.loginForm')
+                ->assertPresent(".login-wrap")
                 ->signIn($email, $password)
                 ->assertSee('Login successfully')
+                ->assertRouteIs('booking.index')
+                ->assertAuthenticated()
                 ->press('@book')
-                ->pause(2000)
                 ->click('.dropdown li')
-                ->pause(2000);
+                ->assertRouteIs('customer.profile')
+                ->back();
         });
     }
 
@@ -34,9 +38,11 @@ class LoginViewTest extends DuskTestCase
         $password = "wrongPass";
         $this->browse(function (Browser $browser) use ($email, $password) {
             $browser->visit(new LoginPage())
+                ->assertRouteIs('auth.customer.loginForm')
+                ->assertPresent(".login-wrap")
                 ->signIn($email, $password)
-                ->assertSee('Email or password not correct')
-                ->pause(2000);
+                ->assertRouteIs('auth.customer.loginForm')
+                ->assertSee('Email or password not correct');
         });
     }
 }

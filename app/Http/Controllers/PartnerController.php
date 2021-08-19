@@ -3,10 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PartnerRequest;
-use App\Models\Booking;
-use App\Models\BookingDetail;
-use App\Models\Hotel;
-use App\Models\Image;
 use App\Repositories\Contracts\BookingDetailRepositoryInterface;
 use App\Repositories\Contracts\BookingRepositoryInterface;
 use App\Repositories\Contracts\HotelRepositoryInterface;
@@ -91,10 +87,13 @@ class PartnerController extends Controller
     public function deny(Request $request, $id)
     {
         $attrs['status'] = $request->status;
-        $order = $this->bookingRepository->update($id, $attrs);
-        $this->bookingDetailRepository->handelRoomForPartner($order, $request->status);
+        if ($attrs['status'] == config('user.denied_number')) {
+            $order = $this->bookingRepository->update($id, $attrs);
+            $this->bookingDetailRepository->handelRoomForPartner($order, $request->status);
 
-        return redirect()->route('partners.order')->with('message', __('deny_success'));
+            return redirect()->route('partners.order')->with('message', __('deny_success'));
+        }
+        return redirect()->route('partners.order')->with('message', __('deny_failed'));
     }
 
     public function checkOut(Request $request, $id)
