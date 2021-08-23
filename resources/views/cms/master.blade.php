@@ -18,6 +18,7 @@
 
     <link rel="stylesheet" href="{{ asset('bower_components/select2/dist/css/select2.min.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
     @yield('css')
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -58,11 +59,13 @@
 
 <script src="{{ asset('assets/js/js.js')  }}"></script>
 
-<script src=" {{ asset('assets/lfm/lfm.js') }}"></script>
+<script src="{{ asset('assets/lfm/lfm.js') }}"></script>
 
-<script src=" {{ asset('assets/js/in18.js') }}"></script>
+<script src="{{ asset('assets/js/in18.js') }}"></script>
 
-<script src=" {{ asset('assets/js/custom.js') }}"></script>
+<script src="{{ asset('assets/js/custom.js') }}"></script>
+
+@translations
 
 @include('cms.sweetAlert2')
 
@@ -76,7 +79,8 @@
     });
 </script>
 
-    @translations
+
+<script src="{{ 'assets/js/chart.js' }}"></script>
 
     @yield('js')
 

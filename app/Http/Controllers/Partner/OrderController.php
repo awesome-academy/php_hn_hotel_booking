@@ -43,7 +43,7 @@ class OrderController extends Controller
         $condition['where'][] = [
             'booking_id', '=', $request->id
         ];
-        $detail = $this->bookingDetailRepository->all(['*'], $condition);
+        $detail = $this->bookingDetailRepository->getAllWithCondition(['*'], $condition);
 
         return json_encode($detail);
     }

@@ -23,7 +23,7 @@ class BookingController extends Controller
         $condition['where'][] = [
             'status', '=', config('user.approved_number'),
         ];
-        $hotels = $this->hotelRepository->all(['*'], $condition, ['images']);
+        $hotels = $this->hotelRepository->getAllWithCondition(['*'], $condition, ['images']);
         if (!empty($hotels)) {
             return view('customer.pages.index', compact('hotels'));
         }

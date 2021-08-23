@@ -87,7 +87,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
         return $query->pluck($colum)->toArray();
     }
 
-    public function all($columns = array('*'), $conditions = [], $relations = [], $orders = [])
+    public function getAllWithCondition($columns = array('*'), $conditions = [], $relations = [], $orders = [])
     {
         $query = $this->filter($conditions, $orders, $relations);
 

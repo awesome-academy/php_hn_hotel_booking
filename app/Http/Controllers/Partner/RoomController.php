@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Partner;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RoomRequest;
+use App\Repositories\Contracts\BookingRepositoryInterface;
 use App\Repositories\Contracts\HotelRepositoryInterface;
 use App\Repositories\Contracts\ImageRepositoryInterface;
 use App\Repositories\Contracts\RoomRepositoryInterface;
@@ -17,17 +18,48 @@ class RoomController extends Controller
     protected $hotelRepository;
     protected $typeRepository;
     protected $imageRepository;
+    protected $bookingRepository;
 
     public function __construct(
         RoomRepositoryInterface $roomRepository,
         HotelRepositoryInterface $hotelRepository,
         TypeRepositoryInterface $typeRepository,
-        ImageRepositoryInterface $imageRepository
+        ImageRepositoryInterface $imageRepository,
+        BookingRepositoryInterface $bookingRepository
     ) {
         $this->roomRepository = $roomRepository;
         $this->hotelRepository = $hotelRepository;
         $this->typeRepository = $typeRepository;
         $this->imageRepository = $imageRepository;
+        $this->bookingRepository = $bookingRepository;
+    }
+
+    public function statisticForPartner()
+    {
+        //general information
+        $totalRevenue = $this->bookingRepository->getTotalRevenue();
+        $condition['where'] = [
+            ['user_id', '=', Auth::id()]
+        ];
+        $numberOfHotel = $this->hotelRepository->getAllWithCondition(['*'], $condition)->count();
+        $numberOfOrders = $this->bookingRepository->getAllWithCondition()->count();
+
+        // statictis order per month in current year
+        $orders = $this->bookingRepository->statisticOrderPerMonth();
+        $data['order'] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        foreach ($orders as $order) {
+            $data['order'][$order->month] = $order->orders;
+        }
+
+        // statictis revenue per month in current year
+        $orders = $this->bookingRepository->statisticRevenuePerMonth();
+        $data['revenue'] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        foreach ($orders as $order) {
+            $data['revenue'][$order->month] = $order->totals;
+        }
+        $data = json_encode($data);
+
+        return view('cms.pages.partner.dashboard', compact('data', 'totalRevenue', 'numberOfHotel', 'numberOfOrders'));
     }
 
     public function index()
@@ -35,7 +67,7 @@ class RoomController extends Controller
         $condition['where'][] = [
             'user_id', '=', Auth::user()->id,
         ];
-        $rooms = $this->roomRepository->all(['*'], $condition, ['hotel', 'type']);
+        $rooms = $this->roomRepository->getAllWithCondition(['*'], $condition, ['hotel', 'type']);
 
         return view('cms.pages.partner.room.index', compact('rooms'));
     }
@@ -45,8 +77,8 @@ class RoomController extends Controller
         $condition['where'][] = [
             'user_id', '=', Auth::user()->id,
         ];
-        $hotels = $this->hotelRepository->all(['*'], $condition);
-        $types = $this->typeRepository->all(['*'], [], ['rooms']);
+        $hotels = $this->hotelRepository->getAllWithCondition(['*'], $condition);
+        $types = $this->typeRepository->getAllWithCondition(['*'], [], ['rooms']);
 
         return view('cms.pages.partner.room.create', compact('hotels', 'types'));
     }
