@@ -3,15 +3,26 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
-use App\Models\Booking;
+use App\Repositories\Contracts\BookingRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
+    protected $bookingRepository;
+
+    public function __construct(
+        BookingRepositoryInterface $bookingRepository
+    ) {
+        $this->bookingRepository = $bookingRepository;
+    }
+
     public function index()
     {
-        $orders = Booking::with('hotel')->where('user_id', Auth::id())->get();
+        $condition['where'][] = [
+            'user_id', '=', Auth::id(),
+        ];
+        $orders = $this->bookingRepository->all(['*'], $condition, ['hotel']);
 
         return view('customer.pages.profile', compact('orders'));
     }
@@ -23,9 +34,9 @@ class ProfileController extends Controller
 
     public function postComment(Request $request, $id)
     {
-        $booking = Booking::findOrFail($id);
-        $booking->rate = $request->rating;
-        $booking->save();
+        $booking = $this->bookingRepository->findOrFail($id);
+        $attrs['rate'] = $request->rating;
+        $this->bookingRepository->update($id, $attrs);
 
         return redirect()->route('customer.profile')->with('message', __('comment_success'));
     }

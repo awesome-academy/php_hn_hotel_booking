@@ -3,27 +3,47 @@
 namespace App\Http\Controllers\Partner;
 
 use App\Http\Controllers\Controller;
-use App\Models\Booking;
-use App\Models\BookingDetail;
-use App\Models\Hotel;
+use App\Repositories\Contracts\BookingDetailRepositoryInterface;
+use App\Repositories\Contracts\BookingRepositoryInterface;
+use App\Repositories\Contracts\HotelRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
+    protected $hotelRepository;
+    protected $bookingRepository;
+    protected $bookingDetailRepository;
+
+    public function __construct(
+        HotelRepositoryInterface $hotelRepository,
+        BookingRepositoryInterface $bookingRepository,
+        BookingDetailRepositoryInterface $bookingDetailRepository
+    ) {
+        $this->hotelRepository = $hotelRepository;
+        $this->bookingRepository = $bookingRepository;
+        $this->bookingDetailRepository = $bookingDetailRepository;
+    }
+
     public function index()
     {
-        $hotelsId = Hotel::where('user_id', Auth::id())->pluck('id')->toArray();
-        $orders = Booking::whereIn('hotel_id', $hotelsId)->with(['hotel', 'user'])
-            ->paginate(config('user.paginate_order'));
+        $conditions['where'][] = [
+            'user_id', '=', Auth::id(),
+        ];
+        $hotelsId = $this->hotelRepository->pluck('id', $conditions);
+        unset($conditions);
+        $conditions['whereIn']['hotel_id'] = $hotelsId;
+        $orders = $this->bookingRepository->paginateList(config('user.paginate_order'), $conditions, ['hotel', 'user']);
 
         return view('cms.pages.partner.order.index', compact('orders'));
     }
 
     public function detail(Request $request)
     {
-        $detail = BookingDetail::where('booking_id', $request->id)->get();
+        $condition['where'][] = [
+            'booking_id', '=', $request->id
+        ];
+        $detail = $this->bookingDetailRepository->all(['*'], $condition);
 
         return json_encode($detail);
     }

@@ -4,26 +4,49 @@ namespace App\Http\Controllers\Partner;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RoomRequest;
-use App\Models\Hotel;
-use App\Models\Image;
-use App\Models\Room;
-use App\Models\Type;
+use App\Repositories\Contracts\HotelRepositoryInterface;
+use App\Repositories\Contracts\ImageRepositoryInterface;
+use App\Repositories\Contracts\RoomRepositoryInterface;
+use App\Repositories\Contracts\TypeRepositoryInterface;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class RoomController extends Controller
 {
+    protected $roomRepository;
+    protected $hotelRepository;
+    protected $typeRepository;
+    protected $imageRepository;
+
+    public function __construct(
+        RoomRepositoryInterface $roomRepository,
+        HotelRepositoryInterface $hotelRepository,
+        TypeRepositoryInterface $typeRepository,
+        ImageRepositoryInterface $imageRepository
+    ) {
+        $this->roomRepository = $roomRepository;
+        $this->hotelRepository = $hotelRepository;
+        $this->typeRepository = $typeRepository;
+        $this->imageRepository = $imageRepository;
+    }
+
     public function index()
     {
-        $rooms = Room::with(['hotel', 'type'])->where('user_id', Auth::user()->id)->get();
+        $condition['where'][] = [
+            'user_id', '=', Auth::user()->id,
+        ];
+        $rooms = $this->roomRepository->all(['*'], $condition, ['hotel', 'type']);
 
         return view('cms.pages.partner.room.index', compact('rooms'));
     }
 
     public function create()
     {
-        $hotels = Hotel::where('user_id', Auth::user()->id)->get();
-        $types = Type::with('rooms')->get();
+        $condition['where'][] = [
+            'user_id', '=', Auth::user()->id,
+        ];
+        $hotels = $this->hotelRepository->all(['*'], $condition);
+        $types = $this->typeRepository->all(['*'], [], ['rooms']);
 
         return view('cms.pages.partner.room.create', compact('hotels', 'types'));
     }
@@ -32,7 +55,7 @@ class RoomController extends Controller
     {
         $attrs = $request->all();
         $attrs['user_id'] = Auth::user()->id;
-        $room = Room::create($attrs);
+        $room = $this->roomRepository->create($attrs);
         // add mutiple images
         $images = $request->images;
         $images_insert = array();
@@ -45,7 +68,7 @@ class RoomController extends Controller
             $image['updated_at'] = Carbon::now();
             array_push($images_insert, $image);
         }
-        Image::insert($images_insert);
+        $this->imageRepository->insert($images_insert);
 
         return redirect()->route('partners.rooms.index')->with('message', __('add_success'));
     }

@@ -27,4 +27,25 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
         return $hotels;
     }
+
+    public function createUserCms($request)
+    {
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->role = config('user.partner');
+        $user->save();
+    }
+
+    public function createUser($request)
+    {
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->role = config('user.customer');
+        $user->phone_number = $request->phoneNumber;
+        $user->save();
+    }
 }

@@ -48,4 +48,25 @@ interface BaseRepositoryInterface
      * @return mixed
      */
     public function findOrFail($id);
+
+    /**
+     * Pluck columns
+     * @param $column, $key, $sortColumn, $direction
+     * @return mixed
+     */
+    public function pluck($column, $key = null, $sortColumn = null, $direction = 'asc');
+
+    /**
+     * Get all data
+     * @param $columns, $conditions, $relations, $orders
+     * @return mixed
+     */
+    public function all($columns = array('*'), $conditions = [], $relations = [], $orders = []);
+
+    /**
+     * Get all data with paginate
+     * @param $columns, $conditions, $relations, $orders
+     * @return mixed
+     */
+    public function paginateList($per = 10, $conditions = [], $relations = [], $orders = []);
 }

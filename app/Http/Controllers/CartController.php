@@ -2,18 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Hotel;
-use App\Models\Room;
+use App\Repositories\Contracts\HotelRepositoryInterface;
+use App\Repositories\Contracts\RoomRepositoryInterface;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
+    protected $roomRepository;
+    protected $hotelRepository;
+    public function __construct(
+        RoomRepositoryInterface $roomRepository,
+        HotelRepositoryInterface $hotelRepository
+    ) {
+        $this->roomRepository = $roomRepository;
+        $this->hotelRepository = $hotelRepository;
+    }
+
     public function addToCart(Request $request)
     {
         $roomId = $request->roomId;
         $hotelId = $request->hotelId;
-        $room = Room::findOrFail($roomId);
+        $room = $this->roomRepository->findOrFail($roomId);
         $carts = session()->get('carts');
         if (!$carts) {
             $carts[$hotelId] = [
@@ -52,7 +62,7 @@ class CartController extends Controller
 
     public function updateCart($carts, $roomId, $hotelId)
     {
-        $remainRoom = Room::findOrFail($roomId)->remaining;
+        $remainRoom = $this->roomRepository->findOrFail($roomId)->remaining;
         if ($remainRoom > $carts[$hotelId][$roomId]['qty']) {
             $carts[$hotelId][$roomId]['qty']++;
             session()->put('carts', $carts);
@@ -69,7 +79,7 @@ class CartController extends Controller
     {
         $roomId = $request->roomId;
         $hotelId = $request->hotelId;
-        $room = Room::findOrFail($roomId);
+        $room = $this->roomRepository->findOrFail($roomId);
         $carts = session()->get('carts');
         if (isset($carts[$hotelId][$roomId])) {
             unset($carts[$hotelId][$roomId]);
@@ -87,7 +97,7 @@ class CartController extends Controller
 
     public function handeCart($carts, $hotelId)
     {
-        $data['hotelName'] = Hotel::find($hotelId)->name;
+        $data['hotelName'] = $this->hotelRepository->findOrFail($hotelId)->name;
         //get one room of carts
         $cart = array_pop($carts);
         $data['checkIn'] = $cart['checkIn']->format('d/m/Y');

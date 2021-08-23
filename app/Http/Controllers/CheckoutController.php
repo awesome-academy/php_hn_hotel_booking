@@ -3,17 +3,38 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\InfoRequest;
-use App\Models\Booking;
-use App\Models\BookingDetail;
-use App\Models\Hotel;
-use App\Models\Room;
+use App\Repositories\Contracts\BookingDetailRepositoryInterface;
+use App\Repositories\Contracts\BookingRepositoryInterface;
+use App\Repositories\Contracts\HotelRepositoryInterface;
+use App\Repositories\Contracts\RoomRepositoryInterface;
+use App\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 
 class CheckoutController extends Controller
 {
+    protected $hotelRepository;
+    protected $bookingRepository;
+    protected $roomRepository;
+    protected $userRepository;
+    protected $bookingDetailRepository;
+
+    public function __construct(
+        HotelRepositoryInterface $hotelRepository,
+        BookingRepositoryInterface $bookingRepository,
+        RoomRepositoryInterface $roomRepository,
+        UserRepositoryInterface $userRepository,
+        BookingDetailRepositoryInterface $bookingDetailRepository
+    ) {
+        $this->hotelRepository = $hotelRepository;
+        $this->bookingRepository = $bookingRepository;
+        $this->roomRepository = $roomRepository;
+        $this->userRepository = $userRepository;
+        $this->bookingDetailRepository = $bookingDetailRepository;
+    }
+
     public function getInfo($hotelId)
     {
-        $hotel = Hotel::findOrFail($hotelId);
+        $hotel = $this->hotelRepository->findOrFail($hotelId);
         $carts = session()->get('carts');
         $total = 0;
         if (isset($carts[$hotelId])) {
@@ -29,7 +50,7 @@ class CheckoutController extends Controller
             //get one booking
             $cart = array_pop($carts[$hotelId]);
             //get name of hotel
-            $hotelName = Room::whereIn('id', $key)->first()->hotel->name;
+            $hotelName = $this->roomRepository->getFirstNameHotel($key);
 
             return view('customer.pages.info', compact('cart', 'hotelName', 'hotel'));
         }
@@ -41,9 +62,8 @@ class CheckoutController extends Controller
     {
         //update phoneNumber for user
         $user = Auth::user();
-        $user->phone_number = $request->phone_number;
-        $user->save();
-
+        $attrs['phone_number'] = $request->phone_number;
+        $this->userRepository->update(Auth::id(), $attrs);
         //handel cart
         $carts = session('carts');
         if (isset($carts[$hotelId])) {
@@ -52,7 +72,7 @@ class CheckoutController extends Controller
             $booking['user_id'] = Auth::id();
             $booking['total'] = session('total');
             $booking['status'] = config('user.pending_number');
-            $bookingId = Booking::create($booking)->id;
+            $bookingId = $this->bookingRepository->create($booking)->id;
 
             $details_booking = array();
             foreach ($carts[$hotelId] as $key => $cart) {
@@ -66,7 +86,7 @@ class CheckoutController extends Controller
                 array_push($details_booking, $detail);
                 $this->updateRoom($cart['qty'], $key);
             }
-            BookingDetail::insert($details_booking);
+            $this->bookingDetailRepository->insert($details_booking);
             unset($carts[$hotelId]);
             session()->put('carts', $carts);
             session()->forget('total');
@@ -77,10 +97,11 @@ class CheckoutController extends Controller
 
     public function updateRoom($qty, $id)
     {
-        $room = Room::findOrFail($id);
+        $room = $this->roomRepository->findOrFail($id);
         if ($room->remaining >= $qty) {
             $room->remaining -= $qty;
-            $room->save();
+            $attrs['remaining'] = $room->remaining;
+            $this->roomRepository->update($id, $attrs);
         }
     }
 }

@@ -2,14 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Hotel;
-use App\Models\Room;
+use App\Repositories\Contracts\HotelRepositoryInterface;
+use App\Repositories\Contracts\RoomRepositoryInterface;
 
 class BookingController extends Controller
 {
+    protected $hotelRepository;
+    protected $roomRepository;
+
+    public function __construct(
+        HotelRepositoryInterface $hotelRepository,
+        RoomRepositoryInterface $roomRepository
+    ) {
+        $this->hotelRepository = $hotelRepository;
+        $this->roomRepository = $roomRepository;
+    }
+
     public function index()
     {
-        $hotels = Hotel::with('images')->where('status', config('user.approved_number'))->get();
+        $condition['where'][] = [
+            'status', '=', config('user.approved_number'),
+        ];
+        $hotels = $this->hotelRepository->all(['*'], $condition, ['images']);
         if (!empty($hotels)) {
             return view('customer.pages.index', compact('hotels'));
         }
@@ -18,7 +32,7 @@ class BookingController extends Controller
     public function detailHotel($hotelId)
     {
         $this->getTotal($hotelId);
-        $hotel = Hotel::findOrFail($hotelId);
+        $hotel = $this->hotelRepository->findOrFail($hotelId);
         $rooms = $hotel->rooms;
         $images = $hotel->images;
         $image = $images->first()->image;
@@ -52,7 +66,7 @@ class BookingController extends Controller
 
     public function roomDetail($id)
     {
-        $room = Room::findOrFail($id);
+        $room = $this->roomRepository->findOrFail($id);
 
         return view('customer.pages.room-detail', compact('room'));
     }
