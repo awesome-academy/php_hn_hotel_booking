@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Repositories\Contracts\RoomRepositoryInterface;
+use App\Repositories\Contracts\TypeRepositoryInterface;
+use App\Repositories\Eloquents\RoomRepository;
+use App\Repositories\Eloquents\TypeRepository;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\ServiceProvider;
 use App\Repositories\Eloquents\UserRepository;
@@ -32,6 +36,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ImageRepositoryInterface::class, ImageRepository::class);
         $this->app->bind(BookingRepositoryInterface::class, BookingRepository::class);
         $this->app->bind(BookingDetailRepositoryInterface::class, BookingDetailRepository::class);
+        $this->app->bind(RoomRepositoryInterface::class, RoomRepository::class);
+        $this->app->bind(TypeRepositoryInterface::class, TypeRepository::class);
     }
 
     /**

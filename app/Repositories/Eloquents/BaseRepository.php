@@ -50,9 +50,9 @@ abstract class BaseRepository implements BaseRepositoryInterface
         $result = $this->find($id);
         if ($result) {
             $result->update($attributes);
+
             return $result;
         }
-
         return false;
     }
 
@@ -78,5 +78,117 @@ abstract class BaseRepository implements BaseRepositoryInterface
         $result = $this->model->findOrFail($id);
 
         return $result;
+    }
+
+    public function pluck($colum, $conditions = [], $relations = [], $orders = [])
+    {
+        $query = $this->filter($conditions, $orders, $relations);
+
+        return $query->pluck($colum)->toArray();
+    }
+
+    public function all($columns = array('*'), $conditions = [], $relations = [], $orders = [])
+    {
+        $query = $this->filter($conditions, $orders, $relations);
+
+        return $query->get($columns);
+    }
+
+    public function filter($conditions, $orders, $relations)
+    {
+        $model = $this->model
+            ->when(!empty($orders), function ($query) use ($orders) {
+                foreach ($orders as $field => $direction) {
+                    $query = $query->orderBy($field, $direction);
+                }
+            })->when(empty($orders), function ($query) {
+                $query->orderBy('created_at', 'desc');
+            });
+
+        return $this->buildQueryFromFilter($model, $conditions)
+            ->when(!empty($relations), function ($query) use ($relations) {
+                $query->with($relations);
+            });
+    }
+
+    private function buildQueryFromFilter($query, $filter = [])
+    {
+        if (!empty($filter)) {
+            $query->where(function ($query) use ($filter) {
+                if (isset($filter['whereIn'])) {
+                    foreach ($filter['whereIn'] as $key => $arr) {
+                        $query->whereIn($key, $arr);
+                    }
+                    unset($filter['whereIn']);
+                }
+
+                if (isset($filter['whereNotIn'])) {
+                    foreach ($filter['whereNotIn'] as $key => $arr) {
+                        $query->whereNotIn($key, $arr);
+                    }
+                    unset($filter['whereNotIn']);
+                }
+
+                if (isset($filter['orWhereIn'])) {
+                    foreach ($filter['orWhereIn'] as $key => $arr) {
+                        $query->orWhereIn($key, $arr);
+                    }
+                    unset($filter['orWhereIn']);
+                }
+
+                if (isset($filter['where'])) {
+                    $query->where($filter['where']);
+                    unset($filter['where']);
+                }
+
+                if (isset($filter['orWhere'])) {
+                    foreach ($filter['orWhere'] as $row) {
+                        $query->orWhere($row[0], $row[1], $row[2]);
+                    }
+                    unset($filter['orWhere']);
+                }
+
+                if (isset($filter['whereNull'])) {
+                    foreach ($filter['whereNull'] as $row) {
+                        $query->whereNull($row);
+                    }
+                    unset($filter['whereNull']);
+                }
+
+                if (!empty($filter['relations'])) {
+                    foreach ($filter['relations'] as $relation => $filter_2) {
+                        if (!empty($filter_2['whereHas'])) {
+                            $_filter = $filter_2['whereHas'];
+                            $query->whereHas($relation, function ($query) use ($_filter) {
+                                $this->buildQueryFromFilter($query, $_filter);
+                            });
+                        }
+
+                        if (!empty($filter_2['orWhereHas'])) {
+                            $_filter = $filter_2['orWhereHas'];
+                            $query->orWhereHas($relation, function ($query) use ($_filter) {
+                                $this->buildQueryFromFilter($query, $_filter);
+                            });
+                        }
+                    }
+                    unset($filter['relations']);
+                }
+            });
+        }
+
+        if (!empty($filter['conditions'])) {
+            foreach ($filter['conditions'] as $row) {
+                $this->buildQueryFromFilter($query, $row);
+            }
+        }
+
+        return $query;
+    }
+
+    public function paginateList($per = 10, $conditions = [], $relations = [], $orders = [])
+    {
+        $query = $this->filter($conditions, $orders, $relations);
+
+        return $query->paginate($per);
     }
 }

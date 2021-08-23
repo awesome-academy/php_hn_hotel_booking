@@ -4,11 +4,18 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
-use App\Models\Role;
-use App\Models\User;
+use App\Repositories\Contracts\UserRepositoryInterface;
 
 class RegisterController extends Controller
 {
+    protected $userRepository;
+
+    public function __construct(
+        UserRepositoryInterface $userRepository
+    ) {
+        $this->userRepository = $userRepository;
+    }
+
     public function register()
     {
         return view('cms.register');
@@ -16,12 +23,7 @@ class RegisterController extends Controller
 
     public function handelRegister(RegisterRequest $request)
     {
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-        $user->role = config('user.partner');
-        $user->save();
+        $this->userRepository->createUserCms($request);
 
         $message = [
             'message' => __('register_success'),
@@ -38,14 +40,7 @@ class RegisterController extends Controller
 
     public function handelRegisterCustomer(RegisterRequest $request)
     {
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-        $user->role = config('user.customer');
-        $user->phone_number = $request->phoneNumber;
-        $user->save();
-
+        $this->userRepository->createUser($request);
         $message = [
             'message' => __('register_success'),
             'status' => 'success',

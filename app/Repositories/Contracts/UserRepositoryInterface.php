@@ -15,6 +15,19 @@ interface UserRepositoryInterface extends BaseRepositoryInterface
      * @param null
      * @return mixed
      */
-
     public function getHotelForPartner();
+
+    /**
+     * get createUser
+     * @param null
+     * @return mixed
+     */
+    public function createUserCms($request);
+
+    /**
+     * get createUser
+     * @param null
+     * @return mixed
+     */
+    public function createUser($request);
 }
