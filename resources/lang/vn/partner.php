@@ -50,4 +50,13 @@ return [
     'Orders' => 'Đơn đặt hàng',
     'Revenues' => 'Doanh thu',
     'more_info' => 'Xem thêm',
+    'foreword' => 'Đây là các đơn đặt hàng tại các khách sạn của bạn trong tuần qua',
+    'hello' => 'Xin chào',
+    'general_information' => 'Thông tin chung',
+    'detail_information' => 'Chi tiết đơn đặt phòng',
+    'order' => 'Đơn',
+    'email' => 'Email',
+    'thanks' => 'Chúc bạn một ngày tốt lành',
+    'subject' => 'Số đơn đặt phòng tại các khách sạn của bạn trong tuần vừa qua',
+    'created_at' => 'Thời gian đặt hàng',
 ];
