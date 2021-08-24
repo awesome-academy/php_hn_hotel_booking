@@ -22,7 +22,7 @@ class ProfileController extends Controller
         $condition['where'][] = [
             'user_id', '=', Auth::id(),
         ];
-        $orders = $this->bookingRepository->all(['*'], $condition, ['hotel']);
+        $orders = $this->bookingRepository->getAllWithCondition(['*'], $condition, ['hotel']);
 
         return view('customer.pages.profile', compact('orders'));
     }

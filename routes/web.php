@@ -63,6 +63,8 @@ Route::group(['prefix' => 'cms'], function () {
 
 Route::group(['prefix' => 'partners', 'as' => 'partners.',
         'middleware' => ['can:login.partner']], function () {
+            Route::get('/', [RoomController::class, 'statisticForPartner'])->name('dashboard');
+
             Route::resource('rooms', RoomController::class)->only('index', 'create', 'store');
 
             Route::resource('hotels', PartnerController::class)->only('index', 'create', 'store');
