@@ -23,4 +23,18 @@ interface BookingRepositoryInterface extends BaseRepositoryInterface
      * @return revenue as month
      */
     public function statisticRevenuePerMonth();
+
+    /**
+     * Get info order in lastweek
+     * @param na
+     * @return total info order
+     */
+    public function getInfoOrderWeekly($idPartner);
+
+    /**
+     * Get total order
+     * @param na
+     * @return total order
+     */
+    public function getTotalOrders($idPartner);
 }

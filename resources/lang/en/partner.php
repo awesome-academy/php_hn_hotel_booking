@@ -50,4 +50,13 @@ return [
     'Orders' => 'Orders',
     'Revenues' => 'Revenues',
     'more_info' => 'More Info',
+    'foreword' => 'Here are the orders at your hotels for the past week',
+    'hello' => 'Hello',
+    'general_information' => 'General Information',
+    'detail_information' => 'Detail Information',
+    'order' => 'Order',
+    'email' => 'Email',
+    'thanks' => 'Thanks',
+    'subject' => 'Email notification of orders in the past week',
+    'created_at' => 'Order time',
 ];

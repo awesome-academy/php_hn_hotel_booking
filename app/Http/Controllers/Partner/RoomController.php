@@ -42,7 +42,7 @@ class RoomController extends Controller
             ['user_id', '=', Auth::id()]
         ];
         $numberOfHotel = $this->hotelRepository->getAllWithCondition(['*'], $condition)->count();
-        $numberOfOrders = $this->bookingRepository->getAllWithCondition()->count();
+        $numberOfOrders = $this->bookingRepository->getTotalOrders(Auth::id());
 
         // statictis order per month in current year
         $orders = $this->bookingRepository->statisticOrderPerMonth();
