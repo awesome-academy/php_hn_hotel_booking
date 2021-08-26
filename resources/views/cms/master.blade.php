@@ -44,6 +44,9 @@
 </div>
 <!-- ./wrapper -->
 <!-- jQuery -->
+
+@translations
+
 <script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
 
 <script src="{{ asset('bower_components/chart.js/dist/Chart.min.js') }}"></script>
@@ -65,8 +68,6 @@
 
 <script src="{{ asset('assets/js/custom.js') }}"></script>
 
-@translations
-
 @include('cms.sweetAlert2')
 
 <script>
@@ -79,8 +80,17 @@
     });
 </script>
 
+<script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.js') }}"></script>
 
-<script src="{{ 'assets/js/chart.js' }}"></script>
+<script>
+    window.PUSHER_APP_KEY = '{{ env('PUSHER_APP_KEY') }}'
+    window.PUSHER_APP_CLUSTER = '{{ env('PUSHER_APP_CLUSTER') }}'
+</script>
+<script src="{{ asset('assets/js/chart.js') }}"></script>
+
+<script src="{{ asset('bower_components/pusher-js/dist/web/pusher.min.js') }}"></script>
+
+<script src="{{ asset('assets/js/notification.js') }}"></script>
 
     @yield('js')
 

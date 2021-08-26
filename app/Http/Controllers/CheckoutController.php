@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\InfoRequest;
+use App\Notifications\OrderNotification;
 use App\Repositories\Contracts\BookingDetailRepositoryInterface;
 use App\Repositories\Contracts\BookingRepositoryInterface;
 use App\Repositories\Contracts\HotelRepositoryInterface;
 use App\Repositories\Contracts\RoomRepositoryInterface;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
+use Pusher\Pusher;
 
 class CheckoutController extends Controller
 {
@@ -62,6 +64,7 @@ class CheckoutController extends Controller
     {
         //update phoneNumber for user
         $user = Auth::user();
+        $bookingId = null;
         $attrs['phone_number'] = $request->phone_number;
         $this->userRepository->update(Auth::id(), $attrs);
         //handel cart
@@ -91,8 +94,32 @@ class CheckoutController extends Controller
             session()->put('carts', $carts);
             session()->forget('total');
         }
+        $partnerId = $this->hotelRepository->findOrFail($hotelId)->user_id;
+        $this->notifyForPartner($partnerId, $bookingId);
 
         return redirect()->route('booking.index')->with('message', __('checkout_success'));
+    }
+
+    public function notifyForPartner($partnerId, $orderId)
+    {
+        $data['title'] = Auth::user()->name;
+        $data['content'] = Auth::user()->name .trans('partner.notify_order');
+        $data['created_at'] = now()->format('d-m-y');
+        $data['route'] = route('partners.order', $orderId);
+        $options = array(
+            'cluster' => env('PUSHER_APP_CLUSTER'),
+            'encrypted' => true,
+        );
+
+        $pusher = new Pusher(
+            env('PUSHER_APP_KEY'),
+            env('PUSHER_APP_SECRET'),
+            env('PUSHER_APP_ID'),
+            $options,
+        );
+        $user = $this->userRepository->findOrFail($partnerId);
+        $user->notify(new OrderNotification($data, $orderId));
+        $pusher->trigger('Notify', 'send-message', $data);
     }
 
     public function updateRoom($qty, $id)

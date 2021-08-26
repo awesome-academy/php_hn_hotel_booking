@@ -59,4 +59,7 @@ return [
     'thanks' => 'Thanks',
     'subject' => 'Email notification of orders in the past week',
     'created_at' => 'Order time',
+    'notify_order' => ' just booked a room at your hotel',
+    'messages' => 'messages',
+    'mark_all_as_read' => 'Mark all as read',
 ];

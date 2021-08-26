@@ -69,7 +69,7 @@ Route::group(['prefix' => 'partners', 'as' => 'partners.',
 
             Route::resource('hotels', PartnerController::class)->only('index', 'create', 'store');
 
-            Route::get('orders', [OrderController::class, 'index'])->name('order');
+            Route::get('orders/{order?}', [OrderController::class, 'index'])->name('order');
 
             Route::post('order/upload/{booking}', [PartnerController::class, 'upload'])->name('order.upload')
                 ->middleware('can:order.approved,booking');
@@ -81,6 +81,8 @@ Route::group(['prefix' => 'partners', 'as' => 'partners.',
                 ->middleware('can:order.checkout,booking');
 
             Route::get('orders/detail', [OrderController::class, 'detail'])->name('order.detail');
+
+            Route::get('notify/markAllAsRead', [OrderController::class, 'markAllAsRead'])->name('notify.markAsRead');
         });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['can:login.admin']], function () {

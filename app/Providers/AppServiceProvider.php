@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Repositories\Contracts\NotificationRepositoryInterface;
 use App\Repositories\Contracts\RoomRepositoryInterface;
 use App\Repositories\Contracts\TypeRepositoryInterface;
+use App\Repositories\Eloquents\NotificationRepository;
 use App\Repositories\Eloquents\RoomRepository;
 use App\Repositories\Eloquents\TypeRepository;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -20,6 +22,8 @@ use App\Repositories\Eloquents\BookingRepository;
 use App\Repositories\Contracts\BookingRepositoryInterface;
 use App\Repositories\Eloquents\BookingDetailRepository;
 use App\Repositories\Contracts\BookingDetailRepositoryInterface;
+use App\Channels\DatabaseChannel;
+use Illuminate\Notifications\Channels\DatabaseChannel as IlluminateDatabaseChannel;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -38,6 +42,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(BookingDetailRepositoryInterface::class, BookingDetailRepository::class);
         $this->app->bind(RoomRepositoryInterface::class, RoomRepository::class);
         $this->app->bind(TypeRepositoryInterface::class, TypeRepository::class);
+        $this->app->bind(NotificationRepositoryInterface::class, NotificationRepository::class);
     }
 
     /**
@@ -51,5 +56,6 @@ class AppServiceProvider extends ServiceProvider
             config('user.type_hotel') => 'App\Models\Hotel',
             config('user.type_room') => 'App\Models\Room',
         ]);
+        $this->app->instance(IlluminateDatabaseChannel::class, new DatabaseChannel);
     }
 }

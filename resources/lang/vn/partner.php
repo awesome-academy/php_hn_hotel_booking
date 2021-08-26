@@ -59,4 +59,7 @@ return [
     'thanks' => 'Chúc bạn một ngày tốt lành',
     'subject' => 'Số đơn đặt phòng tại các khách sạn của bạn trong tuần vừa qua',
     'created_at' => 'Thời gian đặt hàng',
+    'notify_order' => ' vừa đặt phòng tại khách sạn của bạn',
+    'messages' => 'thông báo',
+    'mark_all_as_read' => 'Đánh dấu tất cả đã đọc',
 ];

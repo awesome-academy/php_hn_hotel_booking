@@ -210,3 +210,10 @@
     display: block;
     width: 765px;
 }
+
+.order-notification .dropdown-menu{
+    left: inherit;
+    right: 0px;
+    overflow:scroll;
+    height:400px;
+}
