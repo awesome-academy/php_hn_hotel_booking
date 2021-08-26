@@ -4,10 +4,18 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
+use App\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+    protected $userRepository;
+
+    public function __construct(UserRepositoryInterface $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
+
     public function login()
     {
         return view('cms.login');
@@ -16,7 +24,7 @@ class LoginController extends Controller
     public function handelLogin(LoginRequest $request)
     {
         $attrs = $request->except('_token');
-        if (Auth::attempt($attrs)) {
+        if ($this->userRepository->attempt($attrs)) {
             if (Auth::user()->role == config('user.admin')) {
                 return  redirect()->route('admin.index')->with('message', __('login_success'));
             }
@@ -50,7 +58,7 @@ class LoginController extends Controller
     public function handelLoginCustomer(LoginRequest $request)
     {
         $attrs = $request->except('_token');
-        if (Auth::attempt($attrs) && Auth::user()->role == config('user.customer')) {
+        if ($this->userRepository->attempt($attrs) && Auth::user()->role == config('user.customer')) {
             return  redirect()->route('booking.index')->with('message', __('login_success'));
         }
         $message = [

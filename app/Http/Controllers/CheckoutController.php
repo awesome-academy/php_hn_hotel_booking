@@ -95,31 +95,9 @@ class CheckoutController extends Controller
             session()->forget('total');
         }
         $partnerId = $this->hotelRepository->findOrFail($hotelId)->user_id;
-        $this->notifyForPartner($partnerId, $bookingId);
+        $this->userRepository->notifyForPartner($partnerId, $bookingId);
 
         return redirect()->route('booking.index')->with('message', __('checkout_success'));
-    }
-
-    public function notifyForPartner($partnerId, $orderId)
-    {
-        $data['title'] = Auth::user()->name;
-        $data['content'] = Auth::user()->name .trans('partner.notify_order');
-        $data['created_at'] = now()->format('d-m-y');
-        $data['route'] = route('partners.order', $orderId);
-        $options = array(
-            'cluster' => env('PUSHER_APP_CLUSTER'),
-            'encrypted' => true,
-        );
-
-        $pusher = new Pusher(
-            env('PUSHER_APP_KEY'),
-            env('PUSHER_APP_SECRET'),
-            env('PUSHER_APP_ID'),
-            $options,
-        );
-        $user = $this->userRepository->findOrFail($partnerId);
-        $user->notify(new OrderNotification($data, $orderId));
-        $pusher->trigger('Notify', 'send-message', $data);
     }
 
     public function updateRoom($qty, $id)

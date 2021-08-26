@@ -24,9 +24,8 @@ class BookingController extends Controller
             'status', '=', config('user.approved_number'),
         ];
         $hotels = $this->hotelRepository->getAllWithCondition(['*'], $condition, ['images']);
-        if (!empty($hotels)) {
-            return view('customer.pages.index', compact('hotels'));
-        }
+
+        return view('customer.pages.index', compact('hotels'));
     }
 
     public function detailHotel($hotelId)
@@ -35,7 +34,7 @@ class BookingController extends Controller
         $hotel = $this->hotelRepository->findOrFail($hotelId);
         $rooms = $hotel->rooms;
         $images = $hotel->images;
-        $image = $images->first()->image;
+        $image = $images[0]->image;
         //handel cart
         $carts = session()->get('carts');
         if (!empty($carts[$hotelId])) {

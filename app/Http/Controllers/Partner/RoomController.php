@@ -41,21 +41,20 @@ class RoomController extends Controller
         $condition['where'] = [
             ['user_id', '=', Auth::id()]
         ];
-        $numberOfHotel = $this->hotelRepository->getAllWithCondition(['*'], $condition)->count();
+        $numberOfHotel = $this->hotelRepository->getAllWithCondition(['*'], $condition, [], [], "count");
         $numberOfOrders = $this->bookingRepository->getTotalOrders(Auth::id());
 
         // statictis order per month in current year
         $orders = $this->bookingRepository->statisticOrderPerMonth();
         $data['order'] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         foreach ($orders as $order) {
-            $data['order'][$order->month] = $order->orders;
+            $data['order'][$order->month-1] = $order->orders;
         }
-
         // statictis revenue per month in current year
         $orders = $this->bookingRepository->statisticRevenuePerMonth();
         $data['revenue'] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         foreach ($orders as $order) {
-            $data['revenue'][$order->month] = $order->totals;
+            $data['revenue'][$order->month-1] = $order->totals;
         }
         $data = json_encode($data);
 

@@ -56,7 +56,15 @@ $(document).ready(function () {
     let barChartOptions = {
         responsive: true,
         maintainAspectRatio: false,
-        datasetFill: false
+        datasetFill: false,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    reverse: false,
+                    stepSize: 1
+                },
+            }]
+        }
     }
 
     new Chart(barChartCanvas, {
