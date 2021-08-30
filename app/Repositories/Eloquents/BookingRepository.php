@@ -49,9 +49,7 @@ class BookingRepository extends BaseRepository implements BookingRepositoryInter
             ->where('created_at', '<', $this->yearEnd)
             ->whereIn('hotel_id', $this->getHotelIdOfPartner($idPartner))
             ->where('status', '=', config('user.paid_number'))
-            ->select(DB::raw('SUM(total) as totals, DATE_FORMAT(created_at, "%y") as year'))
-            ->groupBy('year')
-            ->first()->totals;
+            ->sum('total');
 
         return $totalRevenues;
     }
@@ -71,10 +69,9 @@ class BookingRepository extends BaseRepository implements BookingRepositoryInter
             ->where('created_at', '<', $this->endWeek)
             ->whereIn('hotel_id', $this->getHotelIdOfPartner($idPartner))
             ->where('status', '=', config('user.paid_number'))
-            ->select(DB::raw('SUM(total) as totals, DATE_FORMAT(created_at, "%w") as week'))
-            ->groupBy('week')->first();
+            ->sum('total');
 
-        return $totalRevenues->totals ?? 0;
+        return $totalRevenues ?? 0;
     }
 
     public function statisticOrderPerMonth()
@@ -108,11 +105,9 @@ class BookingRepository extends BaseRepository implements BookingRepositoryInter
         $totalOrders = $this->model->where('created_at', '>', $this->startWeek)
             ->where('created_at', '<', $this->endWeek)
             ->whereIn('hotel_id', $this->getHotelIdOfPartner($idPartner))
-            ->select(DB::raw('COUNT(*) as totals, DATE_FORMAT(created_at, "%w") as week'))
-            ->groupBy('week')
-            ->first();
+            ->count();
 
-        return $totalOrders->totals ?? 0;
+        return $totalOrders ?? 0;
     }
 
     public function showStatus($status)

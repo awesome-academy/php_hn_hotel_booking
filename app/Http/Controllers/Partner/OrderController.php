@@ -7,6 +7,7 @@ use App\Repositories\Contracts\BookingDetailRepositoryInterface;
 use App\Repositories\Contracts\BookingRepositoryInterface;
 use App\Repositories\Contracts\HotelRepositoryInterface;
 use App\Repositories\Contracts\NotificationRepositoryInterface;
+use App\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,17 +17,20 @@ class OrderController extends Controller
     protected $bookingRepository;
     protected $bookingDetailRepository;
     protected $notificationRepository;
+    protected $userRepository;
 
     public function __construct(
         HotelRepositoryInterface $hotelRepository,
         BookingRepositoryInterface $bookingRepository,
         BookingDetailRepositoryInterface $bookingDetailRepository,
-        NotificationRepositoryInterface $notificationRepository
+        NotificationRepositoryInterface $notificationRepository,
+        UserRepositoryInterface $userRepository
     ) {
         $this->hotelRepository = $hotelRepository;
         $this->bookingRepository = $bookingRepository;
         $this->bookingDetailRepository = $bookingDetailRepository;
         $this->notificationRepository = $notificationRepository;
+        $this->userRepository = $userRepository;
     }
 
     public function index($order = null)
@@ -35,8 +39,8 @@ class OrderController extends Controller
             $condition['where'][] = [
                 'order_id', '=', $order,
             ];
-            $this->notificationRepository->getAllWithCondition(['*'], $condition)
-                ->first()->update(['read_at' => now()]);
+            $notify =  $this->notificationRepository->getAllWithCondition(['*'], $condition, [], [], 'first');
+            $this->notificationRepository->update($notify->id, ['read_at' => now()]);
         }
         $conditions['where'][] = [
             'user_id', '=', Auth::id(),
@@ -61,7 +65,7 @@ class OrderController extends Controller
 
     public function markAllAsRead()
     {
-        Auth::user()->unreadNotifications->markAsRead();
+        $this->userRepository->markAllAsRead(Auth::user());
 
         return redirect()->back();
     }

@@ -30,4 +30,25 @@ interface UserRepositoryInterface extends BaseRepositoryInterface
      * @return mixed
      */
     public function createUser($request);
+
+    /**
+     * notifyForPartner
+     * @param null
+     * @return mixed
+     */
+    public function notifyForPartner($partnerId, $orderId);
+
+    /**
+     * markAllAsRead
+     * @param null
+     * @return mixed
+     */
+    public function markAllAsRead($user);
+
+    /**
+     * attemp User
+     * @param null
+     * @return mixed
+     */
+    public function attempt($attrs);
 }

@@ -61,7 +61,13 @@ interface BaseRepositoryInterface
      * @param $columns, $conditions, $relations, $orders
      * @return mixed
      */
-    public function getAllWithCondition($columns = array('*'), $conditions = [], $relations = [], $orders = []);
+    public function getAllWithCondition(
+        $columns = array('*'),
+        $conditions = [],
+        $relations = [],
+        $orders = [],
+        $function = null
+    );
 
     /**
      * Get all data with paginate
