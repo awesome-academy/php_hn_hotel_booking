@@ -28,6 +28,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/hellol', function () {
+    return 'hello';
+});
+
 Route::group(['prefix' => 'customer'], function () {
     Route::get('/login', [LoginController::class, 'loginCustomer'])->name('auth.customer.loginForm');
 
