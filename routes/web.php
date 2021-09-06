@@ -80,7 +80,7 @@ Route::group(['prefix' => 'partners', 'as' => 'partners.',
             Route::post('order/checkout/{booking}', [PartnerController::class, 'checkout'])->name('order.paid')
                 ->middleware('can:order.checkout,booking');
 
-            Route::get('orders/detail', [OrderController::class, 'detail'])->name('order.detail');
+            Route::get('order/detail', [OrderController::class, 'detail'])->name('order.detail');
 
             Route::get('notify/markAllAsRead', [OrderController::class, 'markAllAsRead'])->name('notify.markAsRead');
         });
