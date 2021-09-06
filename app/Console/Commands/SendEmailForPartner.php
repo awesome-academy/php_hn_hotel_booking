@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Jobs\SendEmailJob;
 use App\Mail\MailNotifyOrder;
 use App\Repositories\Contracts\BookingRepositoryInterface;
 use App\Repositories\Contracts\UserRepositoryInterface;
@@ -56,7 +57,7 @@ class SendEmailForPartner extends Command
         $emailOfPartners = $this->userRepository->getAllWithCondition(['*'], $condition);
         foreach ($emailOfPartners as $partner) {
             $data = $this->bookingRepository->getInfoOrderWeekly($partner->id);
-            Mail::to($partner->email)->send(new MailNotifyOrder($data));
+            dispatch(new SendEmailJob($data, $partner['email']));
         }
     }
 }
