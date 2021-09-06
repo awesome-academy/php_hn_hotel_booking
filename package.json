@@ -8,7 +8,9 @@
         "hot": "mix watch --hot",
         "prod": "npm run production",
         "production": "mix --production",
-        "build-amd": "npm run bundle-amd && npm run minify-amd"
+        "build-amd": "npm run bundle-amd && npm run minify-amd",
+        "start": "node web.js",
+        "postinstall": "bower cache clean && bower install && npx mix && php artisan vendor:publish --tag=lfm_config && php artisan vendor:publish --tag=lfm_config && php artisan vendor:publish --tag=lfm_public && php artisan vendor:publish --tag=lfm_view --force && php artisan storage:link"
     },
     "devDependencies": {
         "axios": "^0.21",
@@ -18,7 +20,11 @@
         "sweetalert2": "^11.0.20"
     },
     "engines": {
-        "node": ">= 6.9.4",
-        "npm": ">= 4.4.0"
+        "node": "15.14.0",
+        "npm": "7.7.6",
+        "bower": "1.8.12"
+    },
+    "dependencies": {
+        "bower": "^1.8.12"
     }
 }

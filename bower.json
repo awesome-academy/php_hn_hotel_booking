@@ -57,6 +57,11 @@
     "font-awesome": "^5.10.0",
     "sweetalert2": "^11.0.20",
     "adminlte3": "https://github.com/trunghq-2593/assets_adminlte3.git",
-    "assets_travel": "https://github.com/trunghq-2593/assets_travel.git"
+    "assets_travel": "https://github.com/trunghq-2593/assets_travel.git",
+    "foundation": "x",
+    "pusher-js": "pusher#^7.0.3"
+  },
+  "resolutions": {
+    "jquery": "~3.6.0"
   }
 }

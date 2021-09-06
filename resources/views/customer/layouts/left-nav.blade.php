@@ -155,7 +155,7 @@
     <div class="line2"></div>
     <!-- Star ratings -->
     <button type="button" class="collapsebtn" data-toggle="collapse" data-target="#collapse1">
-        @lang('star_rating') <span class="collapsearrow"></span>
+        @lang('customer.star_rating') <span class="collapsearrow"></span>
     </button>
 
     <div id="collapse1" class="collapse in">

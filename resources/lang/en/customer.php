@@ -63,4 +63,11 @@ return [
     'name_placeholder' => 'Enter name',
     'phone_placeholder' => 'Enter phone number',
     'qty' => 'Quantity',
+    'language' => 'Language',
+    'login_for_customer' => 'Login for customer',
+    'login_for_partner' => 'Login for partner',
+    'register_for_customer' => 'Register for customer',
+    'register_for_partner' => 'Register for customer',
+    'partner' => 'Register for partner',
+    'user_action' => 'Action'
 ];

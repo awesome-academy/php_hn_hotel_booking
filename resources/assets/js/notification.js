@@ -6,7 +6,7 @@ var notifications          = notificationsWrapper.find('.notification');
 var  translator = new I18n;
 
 // Enable pusher logging - don't include this in production
-Pusher.logToConsole = true;
+// Pusher.logToConsole = true;
 
 var pusher = new Pusher(window.PUSHER_APP_KEY, {
     cluster: window.PUSHER_APP_CLUSTER,

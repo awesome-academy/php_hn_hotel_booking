@@ -63,4 +63,11 @@ return [
     'name_placeholder' => 'Nhập tên của bạn',
     'phone_placeholder' => 'Nhập số điện thoại',
     'qty' => 'Số lượng',
+    'language' => 'Ngôn ngữ',
+    'login_for_customer' => 'Đăng nhập cho khách hàng',
+    'login_for_partner' => 'Đăng nhập cho đối tác',
+    'register_for_customer' => 'Đăng ký cho khách hàng',
+    'register_for_partner' => 'Đăng ký cho đối tác',
+    'partner' => 'Đăng ký cho đối tác',
+    'user_action' => 'Hành động',
 ];
