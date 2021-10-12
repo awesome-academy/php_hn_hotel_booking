@@ -79,10 +79,12 @@ class BookingRepository extends BaseRepository implements BookingRepositoryInter
         $orders = $this->model->where('created_at', '>', $this->yearStart)
             ->where('created_at', '<', $this->yearEnd)
             ->whereIn('hotel_id', $this->getHotelIdOfPartner())
-            ->where('status', '=', config('user.paid_number'))
-            ->select(DB::raw('COUNT(*) as orders, DATE_FORMAT(created_at, "%c") as month'))
-            ->groupBy('month')
-            ->get();
+            ->where('status', '=', config('user.paid_number'));
+        if (!empty($orders->get()->count())) {
+            $orders = $orders->select(DB::raw("COUNT(*) as orders, to_char(created_at, 'FMMM') as month"))
+                ->groupBy('month')
+                ->get();
+        }
 
         return $orders;
     }
@@ -92,10 +94,12 @@ class BookingRepository extends BaseRepository implements BookingRepositoryInter
         $orders = $this->model->where('created_at', '>', $this->yearStart)
             ->where('created_at', '<', $this->yearEnd)
             ->whereIn('hotel_id', $this->getHotelIdOfPartner())
-            ->where('status', '=', config('user.paid_number'))
-            ->select(DB::raw('SUM(total) as totals, DATE_FORMAT(created_at, "%c") as month'))
-            ->groupBy('month')
-            ->get();
+            ->where('status', '=', config('user.paid_number'));
+        if (!empty($orders->get()->count())) {
+            $orders = $orders->select(DB::raw("SUM(total) as totals, to_char(created_at, 'FMMM') as month"))
+                ->groupBy('month')
+                ->get();
+        }
 
         return $orders;
     }

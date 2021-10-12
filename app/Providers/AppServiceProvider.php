@@ -24,6 +24,7 @@ use App\Repositories\Eloquents\BookingDetailRepository;
 use App\Repositories\Contracts\BookingDetailRepositoryInterface;
 use App\Channels\DatabaseChannel;
 use Illuminate\Notifications\Channels\DatabaseChannel as IlluminateDatabaseChannel;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -52,6 +53,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        URL::forceScheme('https');
         Relation::morphMap([
             config('user.type_hotel') => 'App\Models\Hotel',
             config('user.type_room') => 'App\Models\Room',

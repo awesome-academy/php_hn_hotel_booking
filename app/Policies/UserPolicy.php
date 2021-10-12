@@ -100,4 +100,9 @@ class UserPolicy
     {
         return $user->role == config('user.partner');
     }
+
+    public function loginCustomer(User $user)
+    {
+        return $user->role == config('user.customer');
+    }
 }

@@ -32,5 +32,6 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('comment', BookingPolicy::class . '@comment');
         Gate::define('order.approved', BookingPolicy::class . '@approved');
         Gate::define('order.checkout', BookingPolicy::class . '@checkOut');
+        Gate::define('login.customer', UserPolicy::class . '@loginCustomer');
     }
 }

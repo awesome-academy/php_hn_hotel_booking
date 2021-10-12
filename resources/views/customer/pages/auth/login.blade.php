@@ -36,8 +36,8 @@
             </div>
         </form>
         <div class="login-c3">
-            <div class="left"><a href="#" class="whitelink"><span></span>@lang('register.website')</a></div>
-            <div class="right"><a href="#" class="whitelink">@lang('register.lost_password')</a></div>
+            <div class="left"><a href="{{ route('booking.index') }}" class="whitelink"><span></span>@lang('register.website')</a></div>
+            <div class="right"><a href="{{ route('auth.customer.registerForm') }}" class="whitelink">@lang('register.register')</a></div>
         </div>
     </div>
 @endsection

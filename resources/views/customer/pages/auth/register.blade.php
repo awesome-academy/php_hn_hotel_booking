@@ -42,7 +42,7 @@
             </div>
         </form>
         <div class="login-c3 custom">
-            <div class="left"><a href="#" class="whitelink"><span></span>@lang('register.website')</a></div>
+            <div class="left"><a href="{{ route('booking.index') }}" class="whitelink"><span></span>@lang('register.website')</a></div>
             <div class="right"><a href="{{ route('auth.customer.loginForm') }}" class="whitelink">@lang('register.login_now')</a></div>
         </div>
     </div>

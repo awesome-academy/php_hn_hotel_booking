@@ -24,9 +24,7 @@ use \App\Http\Controllers\CheckoutController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [BookingController::class, 'index'])->name('booking.index');
 
 Route::group(['prefix' => 'customer'], function () {
     Route::get('/login', [LoginController::class, 'loginCustomer'])->name('auth.customer.loginForm');
@@ -39,13 +37,13 @@ Route::group(['prefix' => 'customer'], function () {
 
     Route::post('/register', [RegisterController::class, 'handelRegisterCustomer'])->name('auth.customer.register');
 
-    Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth')->name('customer.profile');
+    Route::get('/profile', [ProfileController::class, 'index'])->middleware(['can:login.customer', 'auth'])->name('customer.profile');
 
     Route::get('/comment/{booking}', [ProfileController::class, 'comment'])
-        ->middleware(['auth', 'can:comment,booking'])->name('customer.reviewForm');
+        ->middleware(['auth', 'can:comment,booking', 'can:login.customer'])->name('customer.reviewForm');
 
     Route::post('/comment/{booking}', [ProfileController::class, 'postComment'])
-        ->middleware(['auth', 'can:comment,booking'])->name('customer.review');
+        ->middleware(['auth', 'can:comment,booking', 'can:login.customer'])->name('customer.review');
 });
 
 
@@ -80,7 +78,7 @@ Route::group(['prefix' => 'partners', 'as' => 'partners.',
             Route::post('order/checkout/{booking}', [PartnerController::class, 'checkout'])->name('order.paid')
                 ->middleware('can:order.checkout,booking');
 
-            Route::get('orders/detail', [OrderController::class, 'detail'])->name('order.detail');
+            Route::get('order/detail', [OrderController::class, 'detail'])->name('order.detail');
 
             Route::get('notify/markAllAsRead', [OrderController::class, 'markAllAsRead'])->name('notify.markAsRead');
         });
@@ -96,13 +94,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['can:login.admin']], functio
 Route::get('change-language/{language}', [LanguageController::class, 'changeLanguage'])->name('change-language');
 
 Route::group(['prefix' => 'booking'], function () {
-    Route::get('/hotels', [BookingController::class, 'index'])->name('booking.index');
-
     Route::get('/hotel/{id}', [BookingController::class, 'detailHotel'])->name('booking.detail-hotel');
 
     Route::get('room/{id}', [BookingController::class, 'roomDetail'])->name('booking.detail-room');
-
-    Route::get('/hotel/{id}', [BookingController::class, 'detailHotel'])->name('booking.detail-hotel');
 
     Route::get('/hotels', [BookingController::class, 'index'])->name('booking.index');
 
@@ -116,4 +110,6 @@ Route::group(['prefix' => 'booking'], function () {
         ->middleware('auth');
 
     Route::post('checkout/{hotelId}', [CheckoutController::class, 'checkOut'])->name('booking.checkout');
+
+    Route::get('hotels/search', [BookingController::class, 'search'])->name('booking.hotels.search');
 });
